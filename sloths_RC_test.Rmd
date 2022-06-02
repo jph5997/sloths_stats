@@ -1,0 +1,19 @@
+---
+title: "R Notebook"
+author: "Jacob Hallowell"
+output: html_notebook
+---
+
+```{r}
+# clean up workspace environment
+rm(list = ls())
+
+# all packages used for the assignment
+library(mosaic)
+library(tidyverse)
+```
+
+The goal of this test is to create the Runs Created Stat for the Ground Sloths, as well as an attempt to visualize other stats.
+```{r}
+
+```
