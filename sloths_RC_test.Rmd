@@ -3,7 +3,7 @@ title: "R Notebook"
 author: "Jacob Hallowell"
 output: html_notebook
 ---
-
+# Setup
 ```{r}
 # clean up workspace environment
 rm(list = ls())
@@ -44,5 +44,55 @@ hit_stats <- transform(hit_stats, GP = as.numeric(GP),
                        SB = as.numeric(SB),
                        XBH = as.numeric(XBH),
                        TB = as.numeric(TB))
-hit_stats <- hit_stats[-c(26, 27), ]
+hit_stats <- hit_stats[-c(25,26, 27), ]
 ```
+This gets us our stats. The last line removes team stats so it doesn't mess with the graphs. The next step is creating a table that filters out pitchers. We can do this just by filtering games to 1 or more.
+
+```{r}
+filteredhitters <-
+  hit_stats %>%
+  filter(PA > 2)
+```
+This also sorts out the HR hitters and pitchers.
+
+# Making Runs Created
+
+There are a few things that go into Runs Created
+
+* Total Bases (TB)
+* Walks (BB)
+* Hits (H)
+* At-bats (AB)
+
+There are a few ways to illustrate Run Created without actually making the stat yet. First, we visualize Walks vs Total bases. For these examples we will be using the Ground Sloths roster.
+```{r}
+filteredhitters %>%
+  ggplot(aes(x = BB, y = TB, color = Last)) +
+  geom_point() +
+  xlab("Walks (BB)") +
+  ylab("Total Bases (TB)") 
+```
+So there is no direct correlation between walks and total bases. It would look like this for other things such as hits.
+
+However, we want to look at something like average vs total bases. This raises the question does more hits really mean more total bases.
+```{r}
+filteredhitters %>%
+  ggplot(aes(x = AVG, y = TB, color = Last)) +
+  geom_point() +
+  xlab("Batting Average (AVG)") +
+  ylab("Total Bases (TB)") 
+```
+Something interesting about average is that it also doesn't correlate to total bases. The leader in total bases, which seems to be Fitzpatrick, has a sub .300 batting average.
+
+Now we want to create our Runs Created stat. 
+```{r}
+filteredhitters <-
+  filteredhitters %>%
+  mutate(RC = TB * ((H + BB)/(AB + BB)))
+
+filteredhitters %>%
+  arrange(desc(RC)) %>%
+  select("First","Last","RC") %>%
+  head(10)
+```
+So after all that work we find that Jon Latham is the team leader in Runs Created with just above 6. The RC stat helps us figure out how many runs players create at the plate.
