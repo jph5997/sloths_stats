@@ -20,3 +20,29 @@ sloths_stat <- read.csv('sloths CSVs/sloths_stats_6-2.csv', skip = 1, header = T
 This loads in any file we choose on the computer. It also formats the file as long as it is a CSV from gamechanger.
 
 With all of these columns of data it makes it hard to mutate and add columns like RC. I could attempt to remove pitching stats but still. I think the best thing to do is to create new separate tables and map from there.
+
+For example, I am going to create a new table selecting only the stats I want.
+```{r}
+hit_stats <-
+  sloths_stat %>%
+  select("Number","First","Last","GP","PA","AB","X1B","X2B","X3B","H","HR","RBI","R","BB","SO","AVG","OBP","SLG","OPS","SB","XBH","TB")
+
+hit_stats <- transform(hit_stats, GP = as.numeric(GP),
+                       PA = as.numeric(PA),
+                       AB = as.numeric(AB),
+                       X1B = as.numeric(X1B),
+                       X2B = as.numeric(X2B),
+                       X3B = as.numeric(X3B),
+                       H = as.numeric(H),
+                       HR = as.numeric(HR),
+                       BB = as.numeric(BB),
+                       SO = as.numeric(SO),
+                       AVG = as.numeric(AVG),
+                       OBP = as.numeric(OBP),
+                       SLG = as.numeric(SLG),
+                       OPS = as.numeric(OPS),
+                       SB = as.numeric(SB),
+                       XBH = as.numeric(XBH),
+                       TB = as.numeric(TB))
+hit_stats <- hit_stats[-c(26, 27), ]
+```

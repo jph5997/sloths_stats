@@ -243,9 +243,36 @@ library(tidyverse)</code></pre>
 <!-- rnb-text-begin -->
 <p>This loads in any file we choose on the computer. It also formats the file as long as it is a CSV from gamechanger.</p>
 <p>With all of these columns of data it makes it hard to mutate and add columns like RC. I could attempt to remove pitching stats but still. I think the best thing to do is to create new separate tables and map from there.</p>
+<p>For example, I am going to create a new table selecting only the stats I want.</p>
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGl0X3N0YXRzIDwtXG4gIHNsb3Roc19zdGF0ICU+JVxuICBzZWxlY3QoXCJOdW1iZXJcIixcIkZpcnN0XCIsXCJMYXN0XCIsXCJHUFwiLFwiUEFcIixcIkFCXCIsXCJYMUJcIixcIlgyQlwiLFwiWDNCXCIsXCJIXCIsXCJIUlwiLFwiUkJJXCIsXCJSXCIsXCJCQlwiLFwiU09cIixcIkFWR1wiLFwiT0JQXCIsXCJTTEdcIixcIk9QU1wiLFwiU0JcIixcIlhCSFwiLFwiVEJcIilcblxuaGl0X3N0YXRzIDwtIHRyYW5zZm9ybShoaXRfc3RhdHMsIEdQID0gYXMubnVtZXJpYyhHUCksXG4gICAgICAgICAgICAgICAgICAgICAgIFBBID0gYXMubnVtZXJpYyhQQSksXG4gICAgICAgICAgICAgICAgICAgICAgIEFCID0gYXMubnVtZXJpYyhBQiksXG4gICAgICAgICAgICAgICAgICAgICAgIFgxQiA9IGFzLm51bWVyaWMoWDFCKSxcbiAgICAgICAgICAgICAgICAgICAgICAgWDJCID0gYXMubnVtZXJpYyhYMkIpLFxuICAgICAgICAgICAgICAgICAgICAgICBYM0IgPSBhcy5udW1lcmljKFgzQiksXG4gICAgICAgICAgICAgICAgICAgICAgIEggPSBhcy5udW1lcmljKEgpLFxuICAgICAgICAgICAgICAgICAgICAgICBIUiA9IGFzLm51bWVyaWMoSFIpLFxuICAgICAgICAgICAgICAgICAgICAgICBCQiA9IGFzLm51bWVyaWMoQkIpLFxuICAgICAgICAgICAgICAgICAgICAgICBTTyA9IGFzLm51bWVyaWMoU08pLFxuICAgICAgICAgICAgICAgICAgICAgICBBVkcgPSBhcy5udW1lcmljKEFWRyksXG4gICAgICAgICAgICAgICAgICAgICAgIE9CUCA9IGFzLm51bWVyaWMoT0JQKSxcbiAgICAgICAgICAgICAgICAgICAgICAgU0xHID0gYXMubnVtZXJpYyhTTEcpLFxuICAgICAgICAgICAgICAgICAgICAgICBPUFMgPSBhcy5udW1lcmljKE9QUyksXG4gICAgICAgICAgICAgICAgICAgICAgIFNCID0gYXMubnVtZXJpYyhTQiksXG4gICAgICAgICAgICAgICAgICAgICAgIFhCSCA9IGFzLm51bWVyaWMoWEJIKSxcbiAgICAgICAgICAgICAgICAgICAgICAgVEIgPSBhcy5udW1lcmljKFRCKSlcbmhpdF9zdGF0cyA8LSBoaXRfc3RhdHNbLWMoMjYsIDI3KSwgXVxuYGBgIn0= -->
+<pre class="r"><code>hit_stats &lt;-
+  sloths_stat %&gt;%
+  select(&quot;Number&quot;,&quot;First&quot;,&quot;Last&quot;,&quot;GP&quot;,&quot;PA&quot;,&quot;AB&quot;,&quot;X1B&quot;,&quot;X2B&quot;,&quot;X3B&quot;,&quot;H&quot;,&quot;HR&quot;,&quot;RBI&quot;,&quot;R&quot;,&quot;BB&quot;,&quot;SO&quot;,&quot;AVG&quot;,&quot;OBP&quot;,&quot;SLG&quot;,&quot;OPS&quot;,&quot;SB&quot;,&quot;XBH&quot;,&quot;TB&quot;)
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQphdXRob3I6ICJKYWNvYiBIYWxsb3dlbGwiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpgYGB7cn0NCiMgY2xlYW4gdXAgd29ya3NwYWNlIGVudmlyb25tZW50DQpybShsaXN0ID0gbHMoKSkNCg0KIyBhbGwgcGFja2FnZXMgdXNlZCBmb3IgdGhlIGFzc2lnbm1lbnQNCmxpYnJhcnkobW9zYWljKQ0KbGlicmFyeSh0aWR5dmVyc2UpDQpgYGANCg0KVGhlIGdvYWwgb2YgdGhpcyB0ZXN0IGlzIHRvIGNyZWF0ZSB0aGUgUnVucyBDcmVhdGVkIFN0YXQgZm9yIHRoZSBHcm91bmQgU2xvdGhzLCBhcyB3ZWxsIGFzIGFuIGF0dGVtcHQgdG8gdmlzdWFsaXplIG90aGVyIHN0YXRzLg0KYGBge3J9DQpzbG90aHNfc3RhdCA8LSByZWFkLmNzdignc2xvdGhzIENTVnMvc2xvdGhzX3N0YXRzXzYtMi5jc3YnLCBza2lwID0gMSwgaGVhZGVyID0gVFJVRSkNCmBgYA0KVGhpcyBsb2FkcyBpbiBhbnkgZmlsZSB3ZSBjaG9vc2Ugb24gdGhlIGNvbXB1dGVyLiBJdCBhbHNvIGZvcm1hdHMgdGhlIGZpbGUgYXMgbG9uZyBhcyBpdCBpcyBhIENTViBmcm9tIGdhbWVjaGFuZ2VyLg0KDQpXaXRoIGFsbCBvZiB0aGVzZSBjb2x1bW5zIG9mIGRhdGEgaXQgbWFrZXMgaXQgaGFyZCB0byBtdXRhdGUgYW5kIGFkZCBjb2x1bW5zIGxpa2UgUkMuIEkgY291bGQgYXR0ZW1wdCB0byByZW1vdmUgcGl0Y2hpbmcgc3RhdHMgYnV0IHN0aWxsLiBJIHRoaW5rIHRoZSBiZXN0IHRoaW5nIHRvIGRvIGlzIHRvIGNyZWF0ZSBuZXcgc2VwYXJhdGUgdGFibGVzIGFuZCBtYXAgZnJvbSB0aGVyZS4=</div>
+hit_stats &lt;- transform(hit_stats, GP = as.numeric(GP),
+                       PA = as.numeric(PA),
+                       AB = as.numeric(AB),
+                       X1B = as.numeric(X1B),
+                       X2B = as.numeric(X2B),
+                       X3B = as.numeric(X3B),
+                       H = as.numeric(H),
+                       HR = as.numeric(HR),
+                       BB = as.numeric(BB),
+                       SO = as.numeric(SO),
+                       AVG = as.numeric(AVG),
+                       OBP = as.numeric(OBP),
+                       SLG = as.numeric(SLG),
+                       OPS = as.numeric(OPS),
+                       SB = as.numeric(SB),
+                       XBH = as.numeric(XBH),
+                       TB = as.numeric(TB))
+hit_stats &lt;- hit_stats[-c(26, 27), ]</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQphdXRob3I6ICJKYWNvYiBIYWxsb3dlbGwiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpgYGB7cn0NCiMgY2xlYW4gdXAgd29ya3NwYWNlIGVudmlyb25tZW50DQpybShsaXN0ID0gbHMoKSkNCg0KIyBhbGwgcGFja2FnZXMgdXNlZCBmb3IgdGhlIGFzc2lnbm1lbnQNCmxpYnJhcnkobW9zYWljKQ0KbGlicmFyeSh0aWR5dmVyc2UpDQpgYGANCg0KVGhlIGdvYWwgb2YgdGhpcyB0ZXN0IGlzIHRvIGNyZWF0ZSB0aGUgUnVucyBDcmVhdGVkIFN0YXQgZm9yIHRoZSBHcm91bmQgU2xvdGhzLCBhcyB3ZWxsIGFzIGFuIGF0dGVtcHQgdG8gdmlzdWFsaXplIG90aGVyIHN0YXRzLg0KYGBge3J9DQpzbG90aHNfc3RhdCA8LSByZWFkLmNzdignc2xvdGhzIENTVnMvc2xvdGhzX3N0YXRzXzYtMi5jc3YnLCBza2lwID0gMSwgaGVhZGVyID0gVFJVRSkNCmBgYA0KVGhpcyBsb2FkcyBpbiBhbnkgZmlsZSB3ZSBjaG9vc2Ugb24gdGhlIGNvbXB1dGVyLiBJdCBhbHNvIGZvcm1hdHMgdGhlIGZpbGUgYXMgbG9uZyBhcyBpdCBpcyBhIENTViBmcm9tIGdhbWVjaGFuZ2VyLg0KDQpXaXRoIGFsbCBvZiB0aGVzZSBjb2x1bW5zIG9mIGRhdGEgaXQgbWFrZXMgaXQgaGFyZCB0byBtdXRhdGUgYW5kIGFkZCBjb2x1bW5zIGxpa2UgUkMuIEkgY291bGQgYXR0ZW1wdCB0byByZW1vdmUgcGl0Y2hpbmcgc3RhdHMgYnV0IHN0aWxsLiBJIHRoaW5rIHRoZSBiZXN0IHRoaW5nIHRvIGRvIGlzIHRvIGNyZWF0ZSBuZXcgc2VwYXJhdGUgdGFibGVzIGFuZCBtYXAgZnJvbSB0aGVyZS4NCg0KRm9yIGV4YW1wbGUsIEkgYW0gZ29pbmcgdG8gY3JlYXRlIGEgbmV3IHRhYmxlIHNlbGVjdGluZyBvbmx5IHRoZSBzdGF0cyBJIHdhbnQuDQpgYGB7cn0NCmhpdF9zdGF0cyA8LQ0KICBzbG90aHNfc3RhdCAlPiUNCiAgc2VsZWN0KCJOdW1iZXIiLCJGaXJzdCIsIkxhc3QiLCJHUCIsIlBBIiwiQUIiLCJYMUIiLCJYMkIiLCJYM0IiLCJIIiwiSFIiLCJSQkkiLCJSIiwiQkIiLCJTTyIsIkFWRyIsIk9CUCIsIlNMRyIsIk9QUyIsIlNCIiwiWEJIIiwiVEIiKQ0KDQpoaXRfc3RhdHMgPC0gdHJhbnNmb3JtKGhpdF9zdGF0cywgR1AgPSBhcy5udW1lcmljKEdQKSwNCiAgICAgICAgICAgICAgICAgICAgICAgUEEgPSBhcy5udW1lcmljKFBBKSwNCiAgICAgICAgICAgICAgICAgICAgICAgQUIgPSBhcy5udW1lcmljKEFCKSwNCiAgICAgICAgICAgICAgICAgICAgICAgWDFCID0gYXMubnVtZXJpYyhYMUIpLA0KICAgICAgICAgICAgICAgICAgICAgICBYMkIgPSBhcy5udW1lcmljKFgyQiksDQogICAgICAgICAgICAgICAgICAgICAgIFgzQiA9IGFzLm51bWVyaWMoWDNCKSwNCiAgICAgICAgICAgICAgICAgICAgICAgSCA9IGFzLm51bWVyaWMoSCksDQogICAgICAgICAgICAgICAgICAgICAgIEhSID0gYXMubnVtZXJpYyhIUiksDQogICAgICAgICAgICAgICAgICAgICAgIEJCID0gYXMubnVtZXJpYyhCQiksDQogICAgICAgICAgICAgICAgICAgICAgIFNPID0gYXMubnVtZXJpYyhTTyksDQogICAgICAgICAgICAgICAgICAgICAgIEFWRyA9IGFzLm51bWVyaWMoQVZHKSwNCiAgICAgICAgICAgICAgICAgICAgICAgT0JQID0gYXMubnVtZXJpYyhPQlApLA0KICAgICAgICAgICAgICAgICAgICAgICBTTEcgPSBhcy5udW1lcmljKFNMRyksDQogICAgICAgICAgICAgICAgICAgICAgIE9QUyA9IGFzLm51bWVyaWMoT1BTKSwNCiAgICAgICAgICAgICAgICAgICAgICAgU0IgPSBhcy5udW1lcmljKFNCKSwNCiAgICAgICAgICAgICAgICAgICAgICAgWEJIID0gYXMubnVtZXJpYyhYQkgpLA0KICAgICAgICAgICAgICAgICAgICAgICBUQiA9IGFzLm51bWVyaWMoVEIpKQ0KaGl0X3N0YXRzIDwtIGhpdF9zdGF0c1stYygyNiwgMjcpLCBdDQpgYGA=</div>
 
 
 
