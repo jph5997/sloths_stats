@@ -15,5 +15,8 @@ library(tidyverse)
 
 The goal of this test is to create the Runs Created Stat for the Ground Sloths, as well as an attempt to visualize other stats.
 ```{r}
-
+sloths_stat <- read.csv('sloths CSVs/sloths_stats_6-2.csv', skip = 1, header = TRUE)
 ```
+This loads in any file we choose on the computer. It also formats the file as long as it is a CSV from gamechanger.
+
+With all of these columns of data it makes it hard to mutate and add columns like RC. I could attempt to remove pitching stats but still. I think the best thing to do is to create new separate tables and map from there.

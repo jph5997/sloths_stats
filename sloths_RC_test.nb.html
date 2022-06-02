@@ -236,9 +236,16 @@ library(tidyverse)</code></pre>
 <p>The goal of this test is to create the Runs Created Stat for the Ground Sloths, as well as an attempt to visualize other stats.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2xvdGhzX3N0YXQgPC0gcmVhZC5jc3YoJ3Nsb3RocyBDU1ZzL3Nsb3Roc19zdGF0c182LTIuY3N2Jywgc2tpcCA9IDEsIGhlYWRlciA9IFRSVUUpXG5gYGAifQ== -->
+<pre class="r"><code>sloths_stat &lt;- read.csv(&#39;sloths CSVs/sloths_stats_6-2.csv&#39;, skip = 1, header = TRUE)</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>This loads in any file we choose on the computer. It also formats the file as long as it is a CSV from gamechanger.</p>
+<p>With all of these columns of data it makes it hard to mutate and add columns like RC. I could attempt to remove pitching stats but still. I think the best thing to do is to create new separate tables and map from there.</p>
+<!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQphdXRob3I6ICJKYWNvYiBIYWxsb3dlbGwiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpgYGB7cn0NCiMgY2xlYW4gdXAgd29ya3NwYWNlIGVudmlyb25tZW50DQpybShsaXN0ID0gbHMoKSkNCg0KIyBhbGwgcGFja2FnZXMgdXNlZCBmb3IgdGhlIGFzc2lnbm1lbnQNCmxpYnJhcnkobW9zYWljKQ0KbGlicmFyeSh0aWR5dmVyc2UpDQpgYGANCg0KVGhlIGdvYWwgb2YgdGhpcyB0ZXN0IGlzIHRvIGNyZWF0ZSB0aGUgUnVucyBDcmVhdGVkIFN0YXQgZm9yIHRoZSBHcm91bmQgU2xvdGhzLCBhcyB3ZWxsIGFzIGFuIGF0dGVtcHQgdG8gdmlzdWFsaXplIG90aGVyIHN0YXRzLg0KYGBge3J9DQoNCmBgYA==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQphdXRob3I6ICJKYWNvYiBIYWxsb3dlbGwiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpgYGB7cn0NCiMgY2xlYW4gdXAgd29ya3NwYWNlIGVudmlyb25tZW50DQpybShsaXN0ID0gbHMoKSkNCg0KIyBhbGwgcGFja2FnZXMgdXNlZCBmb3IgdGhlIGFzc2lnbm1lbnQNCmxpYnJhcnkobW9zYWljKQ0KbGlicmFyeSh0aWR5dmVyc2UpDQpgYGANCg0KVGhlIGdvYWwgb2YgdGhpcyB0ZXN0IGlzIHRvIGNyZWF0ZSB0aGUgUnVucyBDcmVhdGVkIFN0YXQgZm9yIHRoZSBHcm91bmQgU2xvdGhzLCBhcyB3ZWxsIGFzIGFuIGF0dGVtcHQgdG8gdmlzdWFsaXplIG90aGVyIHN0YXRzLg0KYGBge3J9DQpzbG90aHNfc3RhdCA8LSByZWFkLmNzdignc2xvdGhzIENTVnMvc2xvdGhzX3N0YXRzXzYtMi5jc3YnLCBza2lwID0gMSwgaGVhZGVyID0gVFJVRSkNCmBgYA0KVGhpcyBsb2FkcyBpbiBhbnkgZmlsZSB3ZSBjaG9vc2Ugb24gdGhlIGNvbXB1dGVyLiBJdCBhbHNvIGZvcm1hdHMgdGhlIGZpbGUgYXMgbG9uZyBhcyBpdCBpcyBhIENTViBmcm9tIGdhbWVjaGFuZ2VyLg0KDQpXaXRoIGFsbCBvZiB0aGVzZSBjb2x1bW5zIG9mIGRhdGEgaXQgbWFrZXMgaXQgaGFyZCB0byBtdXRhdGUgYW5kIGFkZCBjb2x1bW5zIGxpa2UgUkMuIEkgY291bGQgYXR0ZW1wdCB0byByZW1vdmUgcGl0Y2hpbmcgc3RhdHMgYnV0IHN0aWxsLiBJIHRoaW5rIHRoZSBiZXN0IHRoaW5nIHRvIGRvIGlzIHRvIGNyZWF0ZSBuZXcgc2VwYXJhdGUgdGFibGVzIGFuZCBtYXAgZnJvbSB0aGVyZS4=</div>
 
 
 
