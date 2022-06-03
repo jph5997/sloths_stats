@@ -15,7 +15,7 @@ library(tidyverse)
 
 The goal of this test is to create the Runs Created Stat for the Ground Sloths, as well as an attempt to visualize other stats.
 ```{r}
-sloths_stat <- read.csv('sloths CSVs/sloths_stats_6-2.csv', skip = 1, header = TRUE)
+sloths_stat <- read.csv('sloths CSVs/sloths_6-3.csv', skip = 1, header = TRUE)
 ```
 This loads in any file we choose on the computer. It also formats the file as long as it is a CSV from gamechanger.
 
