@@ -12,3 +12,127 @@ rm(list = ls())
 library(mosaic)
 library(tidyverse)
 ```
+
+First thing we have to do is load in all the different files for the team stats. We use the read.csv function to read our csv into R. We assign the variable <- csv. So if you were to use this you would want to say the variables name in the code.
+```{r}
+ground_stat <- read.csv('sloths CSVs/sloths_6-3.csv', skip = 1, header = TRUE)
+
+merch_stat <- read.csv('Merchants CSVs/merchants_6-3.csv', skip = 1, header = TRUE)
+
+caps_stat <- read.csv('Caps CSVs/caps_6-3.csv', skip = 1, header = TRUE)
+
+bobcats_stat <- read.csv('Bobcats CSVs/bobcats_6-3.csv', skip = 1, header = TRUE)
+```
+
+Now the next step will not usually be needed, but all thsi is doing is selecting the rows we want to use and making them all numbers. Right now they are characters so you can't add or subtract with them. This is because Game Changer stats and csvs are horrible.
+```{r}
+ground_stat <-
+  ground_stat %>%
+  select("Number","First","Last","GP","PA","AB","X1B","X2B","X3B","H","HR","RBI","R","BB","SO","AVG","OBP","SLG","OPS","SB","XBH","TB")
+
+ground_stat <- transform(ground_stat, GP = as.numeric(GP),
+                       PA = as.numeric(PA),
+                       AB = as.numeric(AB),
+                       X1B = as.numeric(X1B),
+                       X2B = as.numeric(X2B),
+                       X3B = as.numeric(X3B),
+                       H = as.numeric(H),
+                       HR = as.numeric(HR),
+                       BB = as.numeric(BB),
+                       SO = as.numeric(SO),
+                       AVG = as.numeric(AVG),
+                       OBP = as.numeric(OBP),
+                       SLG = as.numeric(SLG),
+                       OPS = as.numeric(OPS),
+                       SB = as.numeric(SB),
+                       XBH = as.numeric(XBH),
+                       TB = as.numeric(TB))
+ground_stat <- ground_stat[-c(26, 27), ]
+
+merch_stat <-
+  merch_stat %>%
+  select("Number","First","Last","GP","PA","AB","X1B","X2B","X3B","H","HR","RBI","R","BB","SO","AVG","OBP","SLG","OPS","SB","XBH","TB")
+
+merch_stat <- transform(merch_stat, GP = as.numeric(GP),
+                       PA = as.numeric(PA),
+                       AB = as.numeric(AB),
+                       X1B = as.numeric(X1B),
+                       X2B = as.numeric(X2B),
+                       X3B = as.numeric(X3B),
+                       H = as.numeric(H),
+                       HR = as.numeric(HR),
+                       BB = as.numeric(BB),
+                       SO = as.numeric(SO),
+                       AVG = as.numeric(AVG),
+                       OBP = as.numeric(OBP),
+                       SLG = as.numeric(SLG),
+                       OPS = as.numeric(OPS),
+                       SB = as.numeric(SB),
+                       XBH = as.numeric(XBH),
+                       TB = as.numeric(TB))
+merch_stat <- merch_stat[-c(26, 27), ]
+
+caps_stat <-
+  caps_stat %>%
+  select("Number","First","Last","GP","PA","AB","X1B","X2B","X3B","H","HR","RBI","R","BB","SO","AVG","OBP","SLG","OPS","SB","XBH","TB")
+
+caps_stat <- transform(caps_stat, GP = as.numeric(GP),
+                       PA = as.numeric(PA),
+                       AB = as.numeric(AB),
+                       X1B = as.numeric(X1B),
+                       X2B = as.numeric(X2B),
+                       X3B = as.numeric(X3B),
+                       H = as.numeric(H),
+                       HR = as.numeric(HR),
+                       BB = as.numeric(BB),
+                       SO = as.numeric(SO),
+                       AVG = as.numeric(AVG),
+                       OBP = as.numeric(OBP),
+                       SLG = as.numeric(SLG),
+                       OPS = as.numeric(OPS),
+                       SB = as.numeric(SB),
+                       XBH = as.numeric(XBH),
+                       TB = as.numeric(TB))
+caps_stat <- caps_stat[-c(26, 27), ]
+
+bobcats_stat <-
+  bobcats_stat %>%
+  select("Number","First","Last","GP","PA","AB","X1B","X2B","X3B","H","HR","RBI","R","BB","SO","AVG","OBP","SLG","OPS","SB","XBH","TB")
+
+bobcats_stat <- transform(bobcats_stat, GP = as.numeric(GP),
+                       PA = as.numeric(PA),
+                       AB = as.numeric(AB),
+                       X1B = as.numeric(X1B),
+                       X2B = as.numeric(X2B),
+                       X3B = as.numeric(X3B),
+                       H = as.numeric(H),
+                       HR = as.numeric(HR),
+                       BB = as.numeric(BB),
+                       SO = as.numeric(SO),
+                       AVG = as.numeric(AVG),
+                       OBP = as.numeric(OBP),
+                       SLG = as.numeric(SLG),
+                       OPS = as.numeric(OPS),
+                       SB = as.numeric(SB),
+                       XBH = as.numeric(XBH),
+                       TB = as.numeric(TB))
+bobcats_stat <- bobcats_stat[-c(26, 27), ]
+```
+
+# ISO
+
+What is ISO?
+
+* ISO stands for Isolated Power and it really just takes into account raw power
+
+```{r}
+sloths_stat <-
+  sloths_stat %>%
+  filter(PA > 2) %>%
+  mutate(ISO = (1*X2B + 2*X3B + 3*HR)/SLG - AVG)
+
+merch_stat <-
+  merch_stat %>%
+  filter(PA > 2) %>%
+  mutate(ISO = (1*X2B + 2*X3B + 3*HR)/SLG - AVG)
+```

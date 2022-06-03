@@ -234,9 +234,143 @@ library(mosaic)
 library(tidyverse)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>First thing we have to do is load in all the different files for the team stats. We use the read.csv function to read our csv into R. We assign the variable &lt;- csv. So if you were to use this you would want to say the variables name in the code.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ3JvdW5kX3N0YXQgPC0gcmVhZC5jc3YoJ3Nsb3RocyBDU1ZzL3Nsb3Roc182LTMuY3N2Jywgc2tpcCA9IDEsIGhlYWRlciA9IFRSVUUpXG5cbm1lcmNoX3N0YXQgPC0gcmVhZC5jc3YoJ01lcmNoYW50cyBDU1ZzL21lcmNoYW50c182LTMuY3N2Jywgc2tpcCA9IDEsIGhlYWRlciA9IFRSVUUpXG5cbmNhcHNfc3RhdCA8LSByZWFkLmNzdignQ2FwcyBDU1ZzL2NhcHNfNi0zLmNzdicsIHNraXAgPSAxLCBoZWFkZXIgPSBUUlVFKVxuXG5ib2JjYXRzX3N0YXQgPC0gcmVhZC5jc3YoJ0JvYmNhdHMgQ1NWcy9ib2JjYXRzXzYtMy5jc3YnLCBza2lwID0gMSwgaGVhZGVyID0gVFJVRSlcbmBgYCJ9 -->
+<pre class="r"><code>ground_stat &lt;- read.csv(&#39;sloths CSVs/sloths_6-3.csv&#39;, skip = 1, header = TRUE)
+
+merch_stat &lt;- read.csv(&#39;Merchants CSVs/merchants_6-3.csv&#39;, skip = 1, header = TRUE)
+
+caps_stat &lt;- read.csv(&#39;Caps CSVs/caps_6-3.csv&#39;, skip = 1, header = TRUE)
+
+bobcats_stat &lt;- read.csv(&#39;Bobcats CSVs/bobcats_6-3.csv&#39;, skip = 1, header = TRUE)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Now the next step will not usually be needed, but all thsi is doing is selecting the rows we want to use and making them all numbers. Right now they are characters so you can’t add or subtract with them. This is because Game Changer stats and csvs are horrible.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ3JvdW5kX3N0YXQgPC1cbiAgZ3JvdW5kX3N0YXQgJT4lXG4gIHNlbGVjdChcIk51bWJlclwiLFwiRmlyc3RcIixcIkxhc3RcIixcIkdQXCIsXCJQQVwiLFwiQUJcIixcIlgxQlwiLFwiWDJCXCIsXCJYM0JcIixcIkhcIixcIkhSXCIsXCJSQklcIixcIlJcIixcIkJCXCIsXCJTT1wiLFwiQVZHXCIsXCJPQlBcIixcIlNMR1wiLFwiT1BTXCIsXCJTQlwiLFwiWEJIXCIsXCJUQlwiKVxuXG5ncm91bmRfc3RhdCA8LSB0cmFuc2Zvcm0oZ3JvdW5kX3N0YXQsIEdQID0gYXMubnVtZXJpYyhHUCksXG4gICAgICAgICAgICAgICAgICAgICAgIFBBID0gYXMubnVtZXJpYyhQQSksXG4gICAgICAgICAgICAgICAgICAgICAgIEFCID0gYXMubnVtZXJpYyhBQiksXG4gICAgICAgICAgICAgICAgICAgICAgIFgxQiA9IGFzLm51bWVyaWMoWDFCKSxcbiAgICAgICAgICAgICAgICAgICAgICAgWDJCID0gYXMubnVtZXJpYyhYMkIpLFxuICAgICAgICAgICAgICAgICAgICAgICBYM0IgPSBhcy5udW1lcmljKFgzQiksXG4gICAgICAgICAgICAgICAgICAgICAgIEggPSBhcy5udW1lcmljKEgpLFxuICAgICAgICAgICAgICAgICAgICAgICBIUiA9IGFzLm51bWVyaWMoSFIpLFxuICAgICAgICAgICAgICAgICAgICAgICBCQiA9IGFzLm51bWVyaWMoQkIpLFxuICAgICAgICAgICAgICAgICAgICAgICBTTyA9IGFzLm51bWVyaWMoU08pLFxuICAgICAgICAgICAgICAgICAgICAgICBBVkcgPSBhcy5udW1lcmljKEFWRyksXG4gICAgICAgICAgICAgICAgICAgICAgIE9CUCA9IGFzLm51bWVyaWMoT0JQKSxcbiAgICAgICAgICAgICAgICAgICAgICAgU0xHID0gYXMubnVtZXJpYyhTTEcpLFxuICAgICAgICAgICAgICAgICAgICAgICBPUFMgPSBhcy5udW1lcmljKE9QUyksXG4gICAgICAgICAgICAgICAgICAgICAgIFNCID0gYXMubnVtZXJpYyhTQiksXG4gICAgICAgICAgICAgICAgICAgICAgIFhCSCA9IGFzLm51bWVyaWMoWEJIKSxcbiAgICAgICAgICAgICAgICAgICAgICAgVEIgPSBhcy5udW1lcmljKFRCKSlcbmdyb3VuZF9zdGF0IDwtIGdyb3VuZF9zdGF0Wy1jKDI2LCAyNyksIF1cblxubWVyY2hfc3RhdCA8LVxuICBtZXJjaF9zdGF0ICU+JVxuICBzZWxlY3QoXCJOdW1iZXJcIixcIkZpcnN0XCIsXCJMYXN0XCIsXCJHUFwiLFwiUEFcIixcIkFCXCIsXCJYMUJcIixcIlgyQlwiLFwiWDNCXCIsXCJIXCIsXCJIUlwiLFwiUkJJXCIsXCJSXCIsXCJCQlwiLFwiU09cIixcIkFWR1wiLFwiT0JQXCIsXCJTTEdcIixcIk9QU1wiLFwiU0JcIixcIlhCSFwiLFwiVEJcIilcblxubWVyY2hfc3RhdCA8LSB0cmFuc2Zvcm0obWVyY2hfc3RhdCwgR1AgPSBhcy5udW1lcmljKEdQKSxcbiAgICAgICAgICAgICAgICAgICAgICAgUEEgPSBhcy5udW1lcmljKFBBKSxcbiAgICAgICAgICAgICAgICAgICAgICAgQUIgPSBhcy5udW1lcmljKEFCKSxcbiAgICAgICAgICAgICAgICAgICAgICAgWDFCID0gYXMubnVtZXJpYyhYMUIpLFxuICAgICAgICAgICAgICAgICAgICAgICBYMkIgPSBhcy5udW1lcmljKFgyQiksXG4gICAgICAgICAgICAgICAgICAgICAgIFgzQiA9IGFzLm51bWVyaWMoWDNCKSxcbiAgICAgICAgICAgICAgICAgICAgICAgSCA9IGFzLm51bWVyaWMoSCksXG4gICAgICAgICAgICAgICAgICAgICAgIEhSID0gYXMubnVtZXJpYyhIUiksXG4gICAgICAgICAgICAgICAgICAgICAgIEJCID0gYXMubnVtZXJpYyhCQiksXG4gICAgICAgICAgICAgICAgICAgICAgIFNPID0gYXMubnVtZXJpYyhTTyksXG4gICAgICAgICAgICAgICAgICAgICAgIEFWRyA9IGFzLm51bWVyaWMoQVZHKSxcbiAgICAgICAgICAgICAgICAgICAgICAgT0JQID0gYXMubnVtZXJpYyhPQlApLFxuICAgICAgICAgICAgICAgICAgICAgICBTTEcgPSBhcy5udW1lcmljKFNMRyksXG4gICAgICAgICAgICAgICAgICAgICAgIE9QUyA9IGFzLm51bWVyaWMoT1BTKSxcbiAgICAgICAgICAgICAgICAgICAgICAgU0IgPSBhcy5udW1lcmljKFNCKSxcbiAgICAgICAgICAgICAgICAgICAgICAgWEJIID0gYXMubnVtZXJpYyhYQkgpLFxuICAgICAgICAgICAgICAgICAgICAgICBUQiA9IGFzLm51bWVyaWMoVEIpKVxubWVyY2hfc3RhdCA8LSBtZXJjaF9zdGF0Wy1jKDI2LCAyNyksIF1cblxuY2Fwc19zdGF0IDwtXG4gIGNhcHNfc3RhdCAlPiVcbiAgc2VsZWN0KFwiTnVtYmVyXCIsXCJGaXJzdFwiLFwiTGFzdFwiLFwiR1BcIixcIlBBXCIsXCJBQlwiLFwiWDFCXCIsXCJYMkJcIixcIlgzQlwiLFwiSFwiLFwiSFJcIixcIlJCSVwiLFwiUlwiLFwiQkJcIixcIlNPXCIsXCJBVkdcIixcIk9CUFwiLFwiU0xHXCIsXCJPUFNcIixcIlNCXCIsXCJYQkhcIixcIlRCXCIpXG5cbmNhcHNfc3RhdCA8LSB0cmFuc2Zvcm0oY2Fwc19zdGF0LCBHUCA9IGFzLm51bWVyaWMoR1ApLFxuICAgICAgICAgICAgICAgICAgICAgICBQQSA9IGFzLm51bWVyaWMoUEEpLFxuICAgICAgICAgICAgICAgICAgICAgICBBQiA9IGFzLm51bWVyaWMoQUIpLFxuICAgICAgICAgICAgICAgICAgICAgICBYMUIgPSBhcy5udW1lcmljKFgxQiksXG4gICAgICAgICAgICAgICAgICAgICAgIFgyQiA9IGFzLm51bWVyaWMoWDJCKSxcbiAgICAgICAgICAgICAgICAgICAgICAgWDNCID0gYXMubnVtZXJpYyhYM0IpLFxuICAgICAgICAgICAgICAgICAgICAgICBIID0gYXMubnVtZXJpYyhIKSxcbiAgICAgICAgICAgICAgICAgICAgICAgSFIgPSBhcy5udW1lcmljKEhSKSxcbiAgICAgICAgICAgICAgICAgICAgICAgQkIgPSBhcy5udW1lcmljKEJCKSxcbiAgICAgICAgICAgICAgICAgICAgICAgU08gPSBhcy5udW1lcmljKFNPKSxcbiAgICAgICAgICAgICAgICAgICAgICAgQVZHID0gYXMubnVtZXJpYyhBVkcpLFxuICAgICAgICAgICAgICAgICAgICAgICBPQlAgPSBhcy5udW1lcmljKE9CUCksXG4gICAgICAgICAgICAgICAgICAgICAgIFNMRyA9IGFzLm51bWVyaWMoU0xHKSxcbiAgICAgICAgICAgICAgICAgICAgICAgT1BTID0gYXMubnVtZXJpYyhPUFMpLFxuICAgICAgICAgICAgICAgICAgICAgICBTQiA9IGFzLm51bWVyaWMoU0IpLFxuICAgICAgICAgICAgICAgICAgICAgICBYQkggPSBhcy5udW1lcmljKFhCSCksXG4gICAgICAgICAgICAgICAgICAgICAgIFRCID0gYXMubnVtZXJpYyhUQikpXG5jYXBzX3N0YXQgPC0gY2Fwc19zdGF0Wy1jKDI2LCAyNyksIF1cblxuYm9iY2F0c19zdGF0IDwtXG4gIGJvYmNhdHNfc3RhdCAlPiVcbiAgc2VsZWN0KFwiTnVtYmVyXCIsXCJGaXJzdFwiLFwiTGFzdFwiLFwiR1BcIixcIlBBXCIsXCJBQlwiLFwiWDFCXCIsXCJYMkJcIixcIlgzQlwiLFwiSFwiLFwiSFJcIixcIlJCSVwiLFwiUlwiLFwiQkJcIixcIlNPXCIsXCJBVkdcIixcIk9CUFwiLFwiU0xHXCIsXCJPUFNcIixcIlNCXCIsXCJYQkhcIixcIlRCXCIpXG5cbmJvYmNhdHNfc3RhdCA8LSB0cmFuc2Zvcm0oYm9iY2F0c19zdGF0LCBHUCA9IGFzLm51bWVyaWMoR1ApLFxuICAgICAgICAgICAgICAgICAgICAgICBQQSA9IGFzLm51bWVyaWMoUEEpLFxuICAgICAgICAgICAgICAgICAgICAgICBBQiA9IGFzLm51bWVyaWMoQUIpLFxuICAgICAgICAgICAgICAgICAgICAgICBYMUIgPSBhcy5udW1lcmljKFgxQiksXG4gICAgICAgICAgICAgICAgICAgICAgIFgyQiA9IGFzLm51bWVyaWMoWDJCKSxcbiAgICAgICAgICAgICAgICAgICAgICAgWDNCID0gYXMubnVtZXJpYyhYM0IpLFxuICAgICAgICAgICAgICAgICAgICAgICBIID0gYXMubnVtZXJpYyhIKSxcbiAgICAgICAgICAgICAgICAgICAgICAgSFIgPSBhcy5udW1lcmljKEhSKSxcbiAgICAgICAgICAgICAgICAgICAgICAgQkIgPSBhcy5udW1lcmljKEJCKSxcbiAgICAgICAgICAgICAgICAgICAgICAgU08gPSBhcy5udW1lcmljKFNPKSxcbiAgICAgICAgICAgICAgICAgICAgICAgQVZHID0gYXMubnVtZXJpYyhBVkcpLFxuICAgICAgICAgICAgICAgICAgICAgICBPQlAgPSBhcy5udW1lcmljKE9CUCksXG4gICAgICAgICAgICAgICAgICAgICAgIFNMRyA9IGFzLm51bWVyaWMoU0xHKSxcbiAgICAgICAgICAgICAgICAgICAgICAgT1BTID0gYXMubnVtZXJpYyhPUFMpLFxuICAgICAgICAgICAgICAgICAgICAgICBTQiA9IGFzLm51bWVyaWMoU0IpLFxuICAgICAgICAgICAgICAgICAgICAgICBYQkggPSBhcy5udW1lcmljKFhCSCksXG4gICAgICAgICAgICAgICAgICAgICAgIFRCID0gYXMubnVtZXJpYyhUQikpXG5ib2JjYXRzX3N0YXQgPC0gYm9iY2F0c19zdGF0Wy1jKDI2LCAyNyksIF1cbmBgYCJ9 -->
+<pre class="r"><code>ground_stat &lt;-
+  ground_stat %&gt;%
+  select(&quot;Number&quot;,&quot;First&quot;,&quot;Last&quot;,&quot;GP&quot;,&quot;PA&quot;,&quot;AB&quot;,&quot;X1B&quot;,&quot;X2B&quot;,&quot;X3B&quot;,&quot;H&quot;,&quot;HR&quot;,&quot;RBI&quot;,&quot;R&quot;,&quot;BB&quot;,&quot;SO&quot;,&quot;AVG&quot;,&quot;OBP&quot;,&quot;SLG&quot;,&quot;OPS&quot;,&quot;SB&quot;,&quot;XBH&quot;,&quot;TB&quot;)
+
+ground_stat &lt;- transform(ground_stat, GP = as.numeric(GP),
+                       PA = as.numeric(PA),
+                       AB = as.numeric(AB),
+                       X1B = as.numeric(X1B),
+                       X2B = as.numeric(X2B),
+                       X3B = as.numeric(X3B),
+                       H = as.numeric(H),
+                       HR = as.numeric(HR),
+                       BB = as.numeric(BB),
+                       SO = as.numeric(SO),
+                       AVG = as.numeric(AVG),
+                       OBP = as.numeric(OBP),
+                       SLG = as.numeric(SLG),
+                       OPS = as.numeric(OPS),
+                       SB = as.numeric(SB),
+                       XBH = as.numeric(XBH),
+                       TB = as.numeric(TB))
+ground_stat &lt;- ground_stat[-c(26, 27), ]
+
+merch_stat &lt;-
+  merch_stat %&gt;%
+  select(&quot;Number&quot;,&quot;First&quot;,&quot;Last&quot;,&quot;GP&quot;,&quot;PA&quot;,&quot;AB&quot;,&quot;X1B&quot;,&quot;X2B&quot;,&quot;X3B&quot;,&quot;H&quot;,&quot;HR&quot;,&quot;RBI&quot;,&quot;R&quot;,&quot;BB&quot;,&quot;SO&quot;,&quot;AVG&quot;,&quot;OBP&quot;,&quot;SLG&quot;,&quot;OPS&quot;,&quot;SB&quot;,&quot;XBH&quot;,&quot;TB&quot;)
+
+merch_stat &lt;- transform(merch_stat, GP = as.numeric(GP),
+                       PA = as.numeric(PA),
+                       AB = as.numeric(AB),
+                       X1B = as.numeric(X1B),
+                       X2B = as.numeric(X2B),
+                       X3B = as.numeric(X3B),
+                       H = as.numeric(H),
+                       HR = as.numeric(HR),
+                       BB = as.numeric(BB),
+                       SO = as.numeric(SO),
+                       AVG = as.numeric(AVG),
+                       OBP = as.numeric(OBP),
+                       SLG = as.numeric(SLG),
+                       OPS = as.numeric(OPS),
+                       SB = as.numeric(SB),
+                       XBH = as.numeric(XBH),
+                       TB = as.numeric(TB))
+merch_stat &lt;- merch_stat[-c(26, 27), ]
+
+caps_stat &lt;-
+  caps_stat %&gt;%
+  select(&quot;Number&quot;,&quot;First&quot;,&quot;Last&quot;,&quot;GP&quot;,&quot;PA&quot;,&quot;AB&quot;,&quot;X1B&quot;,&quot;X2B&quot;,&quot;X3B&quot;,&quot;H&quot;,&quot;HR&quot;,&quot;RBI&quot;,&quot;R&quot;,&quot;BB&quot;,&quot;SO&quot;,&quot;AVG&quot;,&quot;OBP&quot;,&quot;SLG&quot;,&quot;OPS&quot;,&quot;SB&quot;,&quot;XBH&quot;,&quot;TB&quot;)
+
+caps_stat &lt;- transform(caps_stat, GP = as.numeric(GP),
+                       PA = as.numeric(PA),
+                       AB = as.numeric(AB),
+                       X1B = as.numeric(X1B),
+                       X2B = as.numeric(X2B),
+                       X3B = as.numeric(X3B),
+                       H = as.numeric(H),
+                       HR = as.numeric(HR),
+                       BB = as.numeric(BB),
+                       SO = as.numeric(SO),
+                       AVG = as.numeric(AVG),
+                       OBP = as.numeric(OBP),
+                       SLG = as.numeric(SLG),
+                       OPS = as.numeric(OPS),
+                       SB = as.numeric(SB),
+                       XBH = as.numeric(XBH),
+                       TB = as.numeric(TB))
+caps_stat &lt;- caps_stat[-c(26, 27), ]
+
+bobcats_stat &lt;-
+  bobcats_stat %&gt;%
+  select(&quot;Number&quot;,&quot;First&quot;,&quot;Last&quot;,&quot;GP&quot;,&quot;PA&quot;,&quot;AB&quot;,&quot;X1B&quot;,&quot;X2B&quot;,&quot;X3B&quot;,&quot;H&quot;,&quot;HR&quot;,&quot;RBI&quot;,&quot;R&quot;,&quot;BB&quot;,&quot;SO&quot;,&quot;AVG&quot;,&quot;OBP&quot;,&quot;SLG&quot;,&quot;OPS&quot;,&quot;SB&quot;,&quot;XBH&quot;,&quot;TB&quot;)
+
+bobcats_stat &lt;- transform(bobcats_stat, GP = as.numeric(GP),
+                       PA = as.numeric(PA),
+                       AB = as.numeric(AB),
+                       X1B = as.numeric(X1B),
+                       X2B = as.numeric(X2B),
+                       X3B = as.numeric(X3B),
+                       H = as.numeric(H),
+                       HR = as.numeric(HR),
+                       BB = as.numeric(BB),
+                       SO = as.numeric(SO),
+                       AVG = as.numeric(AVG),
+                       OBP = as.numeric(OBP),
+                       SLG = as.numeric(SLG),
+                       OPS = as.numeric(OPS),
+                       SB = as.numeric(SB),
+                       XBH = as.numeric(XBH),
+                       TB = as.numeric(TB))
+bobcats_stat &lt;- bobcats_stat[-c(26, 27), ]</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="iso" class="section level1">
+<h1>ISO</h1>
+<p>What is ISO?</p>
+<ul>
+<li>ISO stands for Isolated Power and it really just takes into account raw power</li>
+</ul>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2xvdGhzX3N0YXQgPC1cbiAgc2xvdGhzX3N0YXQgJT4lXG4gIGZpbHRlcihQQSA+IDIpICU+JVxuICBtdXRhdGUoSVNPID0gKDEqWDJCICsgMipYM0IgKyAzKkhSKS9TTEcgLSBBVkcpXG5cbm1lcmNoX3N0YXQgPC1cbiAgbWVyY2hfc3RhdCAlPiVcbiAgZmlsdGVyKFBBID4gMikgJT4lXG4gIG11dGF0ZShJU08gPSAoMSpYMkIgKyAyKlgzQiArIDMqSFIpL1NMRyAtIEFWRylcbmBgYCJ9 -->
+<pre class="r"><code>sloths_stat &lt;-
+  sloths_stat %&gt;%
+  filter(PA &gt; 2) %&gt;%
+  mutate(ISO = (1*X2B + 2*X3B + 3*HR)/SLG - AVG)
+
+merch_stat &lt;-
+  merch_stat %&gt;%
+  filter(PA &gt; 2) %&gt;%
+  mutate(ISO = (1*X2B + 2*X3B + 3*HR)/SLG - AVG)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQphdXRob3I6ICJKYWNvYiBIYWxsb3dlbGwiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KIyBTZXR1cA0KYGBge3J9DQojIGNsZWFuIHVwIHdvcmtzcGFjZSBlbnZpcm9ubWVudA0Kcm0obGlzdCA9IGxzKCkpDQoNCiMgYWxsIHBhY2thZ2VzIHVzZWQgZm9yIHRoZSBhc3NpZ25tZW50DQpsaWJyYXJ5KG1vc2FpYykNCmxpYnJhcnkodGlkeXZlcnNlKQ0KYGBgDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQphdXRob3I6ICJKYWNvYiBIYWxsb3dlbGwiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KIyBTZXR1cA0KYGBge3J9DQojIGNsZWFuIHVwIHdvcmtzcGFjZSBlbnZpcm9ubWVudA0Kcm0obGlzdCA9IGxzKCkpDQoNCiMgYWxsIHBhY2thZ2VzIHVzZWQgZm9yIHRoZSBhc3NpZ25tZW50DQpsaWJyYXJ5KG1vc2FpYykNCmxpYnJhcnkodGlkeXZlcnNlKQ0KYGBgDQoNCkZpcnN0IHRoaW5nIHdlIGhhdmUgdG8gZG8gaXMgbG9hZCBpbiBhbGwgdGhlIGRpZmZlcmVudCBmaWxlcyBmb3IgdGhlIHRlYW0gc3RhdHMuIFdlIHVzZSB0aGUgcmVhZC5jc3YgZnVuY3Rpb24gdG8gcmVhZCBvdXIgY3N2IGludG8gUi4gV2UgYXNzaWduIHRoZSB2YXJpYWJsZSA8LSBjc3YuIFNvIGlmIHlvdSB3ZXJlIHRvIHVzZSB0aGlzIHlvdSB3b3VsZCB3YW50IHRvIHNheSB0aGUgdmFyaWFibGVzIG5hbWUgaW4gdGhlIGNvZGUuDQpgYGB7cn0NCmdyb3VuZF9zdGF0IDwtIHJlYWQuY3N2KCdzbG90aHMgQ1NWcy9zbG90aHNfNi0zLmNzdicsIHNraXAgPSAxLCBoZWFkZXIgPSBUUlVFKQ0KDQptZXJjaF9zdGF0IDwtIHJlYWQuY3N2KCdNZXJjaGFudHMgQ1NWcy9tZXJjaGFudHNfNi0zLmNzdicsIHNraXAgPSAxLCBoZWFkZXIgPSBUUlVFKQ0KDQpjYXBzX3N0YXQgPC0gcmVhZC5jc3YoJ0NhcHMgQ1NWcy9jYXBzXzYtMy5jc3YnLCBza2lwID0gMSwgaGVhZGVyID0gVFJVRSkNCg0KYm9iY2F0c19zdGF0IDwtIHJlYWQuY3N2KCdCb2JjYXRzIENTVnMvYm9iY2F0c182LTMuY3N2Jywgc2tpcCA9IDEsIGhlYWRlciA9IFRSVUUpDQpgYGANCg0KTm93IHRoZSBuZXh0IHN0ZXAgd2lsbCBub3QgdXN1YWxseSBiZSBuZWVkZWQsIGJ1dCBhbGwgdGhzaSBpcyBkb2luZyBpcyBzZWxlY3RpbmcgdGhlIHJvd3Mgd2Ugd2FudCB0byB1c2UgYW5kIG1ha2luZyB0aGVtIGFsbCBudW1iZXJzLiBSaWdodCBub3cgdGhleSBhcmUgY2hhcmFjdGVycyBzbyB5b3UgY2FuJ3QgYWRkIG9yIHN1YnRyYWN0IHdpdGggdGhlbS4gVGhpcyBpcyBiZWNhdXNlIEdhbWUgQ2hhbmdlciBzdGF0cyBhbmQgY3N2cyBhcmUgaG9ycmlibGUuDQpgYGB7cn0NCmdyb3VuZF9zdGF0IDwtDQogIGdyb3VuZF9zdGF0ICU+JQ0KICBzZWxlY3QoIk51bWJlciIsIkZpcnN0IiwiTGFzdCIsIkdQIiwiUEEiLCJBQiIsIlgxQiIsIlgyQiIsIlgzQiIsIkgiLCJIUiIsIlJCSSIsIlIiLCJCQiIsIlNPIiwiQVZHIiwiT0JQIiwiU0xHIiwiT1BTIiwiU0IiLCJYQkgiLCJUQiIpDQoNCmdyb3VuZF9zdGF0IDwtIHRyYW5zZm9ybShncm91bmRfc3RhdCwgR1AgPSBhcy5udW1lcmljKEdQKSwNCiAgICAgICAgICAgICAgICAgICAgICAgUEEgPSBhcy5udW1lcmljKFBBKSwNCiAgICAgICAgICAgICAgICAgICAgICAgQUIgPSBhcy5udW1lcmljKEFCKSwNCiAgICAgICAgICAgICAgICAgICAgICAgWDFCID0gYXMubnVtZXJpYyhYMUIpLA0KICAgICAgICAgICAgICAgICAgICAgICBYMkIgPSBhcy5udW1lcmljKFgyQiksDQogICAgICAgICAgICAgICAgICAgICAgIFgzQiA9IGFzLm51bWVyaWMoWDNCKSwNCiAgICAgICAgICAgICAgICAgICAgICAgSCA9IGFzLm51bWVyaWMoSCksDQogICAgICAgICAgICAgICAgICAgICAgIEhSID0gYXMubnVtZXJpYyhIUiksDQogICAgICAgICAgICAgICAgICAgICAgIEJCID0gYXMubnVtZXJpYyhCQiksDQogICAgICAgICAgICAgICAgICAgICAgIFNPID0gYXMubnVtZXJpYyhTTyksDQogICAgICAgICAgICAgICAgICAgICAgIEFWRyA9IGFzLm51bWVyaWMoQVZHKSwNCiAgICAgICAgICAgICAgICAgICAgICAgT0JQID0gYXMubnVtZXJpYyhPQlApLA0KICAgICAgICAgICAgICAgICAgICAgICBTTEcgPSBhcy5udW1lcmljKFNMRyksDQogICAgICAgICAgICAgICAgICAgICAgIE9QUyA9IGFzLm51bWVyaWMoT1BTKSwNCiAgICAgICAgICAgICAgICAgICAgICAgU0IgPSBhcy5udW1lcmljKFNCKSwNCiAgICAgICAgICAgICAgICAgICAgICAgWEJIID0gYXMubnVtZXJpYyhYQkgpLA0KICAgICAgICAgICAgICAgICAgICAgICBUQiA9IGFzLm51bWVyaWMoVEIpKQ0KZ3JvdW5kX3N0YXQgPC0gZ3JvdW5kX3N0YXRbLWMoMjYsIDI3KSwgXQ0KDQptZXJjaF9zdGF0IDwtDQogIG1lcmNoX3N0YXQgJT4lDQogIHNlbGVjdCgiTnVtYmVyIiwiRmlyc3QiLCJMYXN0IiwiR1AiLCJQQSIsIkFCIiwiWDFCIiwiWDJCIiwiWDNCIiwiSCIsIkhSIiwiUkJJIiwiUiIsIkJCIiwiU08iLCJBVkciLCJPQlAiLCJTTEciLCJPUFMiLCJTQiIsIlhCSCIsIlRCIikNCg0KbWVyY2hfc3RhdCA8LSB0cmFuc2Zvcm0obWVyY2hfc3RhdCwgR1AgPSBhcy5udW1lcmljKEdQKSwNCiAgICAgICAgICAgICAgICAgICAgICAgUEEgPSBhcy5udW1lcmljKFBBKSwNCiAgICAgICAgICAgICAgICAgICAgICAgQUIgPSBhcy5udW1lcmljKEFCKSwNCiAgICAgICAgICAgICAgICAgICAgICAgWDFCID0gYXMubnVtZXJpYyhYMUIpLA0KICAgICAgICAgICAgICAgICAgICAgICBYMkIgPSBhcy5udW1lcmljKFgyQiksDQogICAgICAgICAgICAgICAgICAgICAgIFgzQiA9IGFzLm51bWVyaWMoWDNCKSwNCiAgICAgICAgICAgICAgICAgICAgICAgSCA9IGFzLm51bWVyaWMoSCksDQogICAgICAgICAgICAgICAgICAgICAgIEhSID0gYXMubnVtZXJpYyhIUiksDQogICAgICAgICAgICAgICAgICAgICAgIEJCID0gYXMubnVtZXJpYyhCQiksDQogICAgICAgICAgICAgICAgICAgICAgIFNPID0gYXMubnVtZXJpYyhTTyksDQogICAgICAgICAgICAgICAgICAgICAgIEFWRyA9IGFzLm51bWVyaWMoQVZHKSwNCiAgICAgICAgICAgICAgICAgICAgICAgT0JQID0gYXMubnVtZXJpYyhPQlApLA0KICAgICAgICAgICAgICAgICAgICAgICBTTEcgPSBhcy5udW1lcmljKFNMRyksDQogICAgICAgICAgICAgICAgICAgICAgIE9QUyA9IGFzLm51bWVyaWMoT1BTKSwNCiAgICAgICAgICAgICAgICAgICAgICAgU0IgPSBhcy5udW1lcmljKFNCKSwNCiAgICAgICAgICAgICAgICAgICAgICAgWEJIID0gYXMubnVtZXJpYyhYQkgpLA0KICAgICAgICAgICAgICAgICAgICAgICBUQiA9IGFzLm51bWVyaWMoVEIpKQ0KbWVyY2hfc3RhdCA8LSBtZXJjaF9zdGF0Wy1jKDI2LCAyNyksIF0NCg0KY2Fwc19zdGF0IDwtDQogIGNhcHNfc3RhdCAlPiUNCiAgc2VsZWN0KCJOdW1iZXIiLCJGaXJzdCIsIkxhc3QiLCJHUCIsIlBBIiwiQUIiLCJYMUIiLCJYMkIiLCJYM0IiLCJIIiwiSFIiLCJSQkkiLCJSIiwiQkIiLCJTTyIsIkFWRyIsIk9CUCIsIlNMRyIsIk9QUyIsIlNCIiwiWEJIIiwiVEIiKQ0KDQpjYXBzX3N0YXQgPC0gdHJhbnNmb3JtKGNhcHNfc3RhdCwgR1AgPSBhcy5udW1lcmljKEdQKSwNCiAgICAgICAgICAgICAgICAgICAgICAgUEEgPSBhcy5udW1lcmljKFBBKSwNCiAgICAgICAgICAgICAgICAgICAgICAgQUIgPSBhcy5udW1lcmljKEFCKSwNCiAgICAgICAgICAgICAgICAgICAgICAgWDFCID0gYXMubnVtZXJpYyhYMUIpLA0KICAgICAgICAgICAgICAgICAgICAgICBYMkIgPSBhcy5udW1lcmljKFgyQiksDQogICAgICAgICAgICAgICAgICAgICAgIFgzQiA9IGFzLm51bWVyaWMoWDNCKSwNCiAgICAgICAgICAgICAgICAgICAgICAgSCA9IGFzLm51bWVyaWMoSCksDQogICAgICAgICAgICAgICAgICAgICAgIEhSID0gYXMubnVtZXJpYyhIUiksDQogICAgICAgICAgICAgICAgICAgICAgIEJCID0gYXMubnVtZXJpYyhCQiksDQogICAgICAgICAgICAgICAgICAgICAgIFNPID0gYXMubnVtZXJpYyhTTyksDQogICAgICAgICAgICAgICAgICAgICAgIEFWRyA9IGFzLm51bWVyaWMoQVZHKSwNCiAgICAgICAgICAgICAgICAgICAgICAgT0JQID0gYXMubnVtZXJpYyhPQlApLA0KICAgICAgICAgICAgICAgICAgICAgICBTTEcgPSBhcy5udW1lcmljKFNMRyksDQogICAgICAgICAgICAgICAgICAgICAgIE9QUyA9IGFzLm51bWVyaWMoT1BTKSwNCiAgICAgICAgICAgICAgICAgICAgICAgU0IgPSBhcy5udW1lcmljKFNCKSwNCiAgICAgICAgICAgICAgICAgICAgICAgWEJIID0gYXMubnVtZXJpYyhYQkgpLA0KICAgICAgICAgICAgICAgICAgICAgICBUQiA9IGFzLm51bWVyaWMoVEIpKQ0KY2Fwc19zdGF0IDwtIGNhcHNfc3RhdFstYygyNiwgMjcpLCBdDQoNCmJvYmNhdHNfc3RhdCA8LQ0KICBib2JjYXRzX3N0YXQgJT4lDQogIHNlbGVjdCgiTnVtYmVyIiwiRmlyc3QiLCJMYXN0IiwiR1AiLCJQQSIsIkFCIiwiWDFCIiwiWDJCIiwiWDNCIiwiSCIsIkhSIiwiUkJJIiwiUiIsIkJCIiwiU08iLCJBVkciLCJPQlAiLCJTTEciLCJPUFMiLCJTQiIsIlhCSCIsIlRCIikNCg0KYm9iY2F0c19zdGF0IDwtIHRyYW5zZm9ybShib2JjYXRzX3N0YXQsIEdQID0gYXMubnVtZXJpYyhHUCksDQogICAgICAgICAgICAgICAgICAgICAgIFBBID0gYXMubnVtZXJpYyhQQSksDQogICAgICAgICAgICAgICAgICAgICAgIEFCID0gYXMubnVtZXJpYyhBQiksDQogICAgICAgICAgICAgICAgICAgICAgIFgxQiA9IGFzLm51bWVyaWMoWDFCKSwNCiAgICAgICAgICAgICAgICAgICAgICAgWDJCID0gYXMubnVtZXJpYyhYMkIpLA0KICAgICAgICAgICAgICAgICAgICAgICBYM0IgPSBhcy5udW1lcmljKFgzQiksDQogICAgICAgICAgICAgICAgICAgICAgIEggPSBhcy5udW1lcmljKEgpLA0KICAgICAgICAgICAgICAgICAgICAgICBIUiA9IGFzLm51bWVyaWMoSFIpLA0KICAgICAgICAgICAgICAgICAgICAgICBCQiA9IGFzLm51bWVyaWMoQkIpLA0KICAgICAgICAgICAgICAgICAgICAgICBTTyA9IGFzLm51bWVyaWMoU08pLA0KICAgICAgICAgICAgICAgICAgICAgICBBVkcgPSBhcy5udW1lcmljKEFWRyksDQogICAgICAgICAgICAgICAgICAgICAgIE9CUCA9IGFzLm51bWVyaWMoT0JQKSwNCiAgICAgICAgICAgICAgICAgICAgICAgU0xHID0gYXMubnVtZXJpYyhTTEcpLA0KICAgICAgICAgICAgICAgICAgICAgICBPUFMgPSBhcy5udW1lcmljKE9QUyksDQogICAgICAgICAgICAgICAgICAgICAgIFNCID0gYXMubnVtZXJpYyhTQiksDQogICAgICAgICAgICAgICAgICAgICAgIFhCSCA9IGFzLm51bWVyaWMoWEJIKSwNCiAgICAgICAgICAgICAgICAgICAgICAgVEIgPSBhcy5udW1lcmljKFRCKSkNCmJvYmNhdHNfc3RhdCA8LSBib2JjYXRzX3N0YXRbLWMoMjYsIDI3KSwgXQ0KYGBgDQoNCiMgSVNPDQoNCldoYXQgaXMgSVNPPw0KDQoqIElTTyBzdGFuZHMgZm9yIElzb2xhdGVkIFBvd2VyIGFuZCBpdCByZWFsbHkganVzdCB0YWtlcyBpbnRvIGFjY291bnQgcmF3IHBvd2VyDQoNCmBgYHtyfQ0Kc2xvdGhzX3N0YXQgPC0NCiAgc2xvdGhzX3N0YXQgJT4lDQogIGZpbHRlcihQQSA+IDIpICU+JQ0KICBtdXRhdGUoSVNPID0gKDEqWDJCICsgMipYM0IgKyAzKkhSKS9TTEcgLSBBVkcpDQoNCm1lcmNoX3N0YXQgPC0NCiAgbWVyY2hfc3RhdCAlPiUNCiAgZmlsdGVyKFBBID4gMikgJT4lDQogIG11dGF0ZShJU08gPSAoMSpYMkIgKyAyKlgzQiArIDMqSFIpL1NMRyAtIEFWRykNCmBgYA==</div>
 
 
 
