@@ -47,7 +47,7 @@ ground_stat <- transform(ground_stat, GP = as.numeric(GP),
                        SB = as.numeric(SB),
                        XBH = as.numeric(XBH),
                        TB = as.numeric(TB))
-ground_stat <- ground_stat[-c(26, 27), ]
+
 
 merch_stat <-
   merch_stat %>%
