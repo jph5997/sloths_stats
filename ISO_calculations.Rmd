@@ -126,8 +126,8 @@ What is ISO?
 * ISO stands for Isolated Power and it really just takes into account raw power
 
 ```{r}
-sloths_stat <-
-  sloths_stat %>%
+ground_stat <-
+  ground_stat %>%
   filter(PA > 2) %>%
   mutate(ISO = (1*X2B + 2*X3B + 3*HR)/SLG - AVG)
 
@@ -135,4 +135,20 @@ merch_stat <-
   merch_stat %>%
   filter(PA > 2) %>%
   mutate(ISO = (1*X2B + 2*X3B + 3*HR)/SLG - AVG)
+
+caps_stat <-
+  caps_stat %>%
+  filter(PA > 2) %>%
+  mutate(ISO = (1*X2B + 2*X3B + 3*HR)/SLG - AVG)
+
+bobcats_stat <-
+  bobcats_stat %>%
+  filter(PA > 2) %>%
+  mutate(ISO = (1*X2B + 2*X3B + 3*HR)/SLG - AVG)
 ```
+After doing all of these calculations, we used the mutate function to add a column to the tables. We really want to cipher through and find out how to add the team totals to get the league average.
+
+```{r}
+library(dplyr)
+```
+This library is used because we are going to need it to combine all rows of the tables
