@@ -1,0 +1,20 @@
+---
+title: "Testing Rapsodo Hitting"
+author: "Jacob Hallowell"
+output: html_notebook
+---
+
+# Setup
+```{r}
+# clean up workspace environment
+rm(list = ls())
+
+# all packages used for the assignment
+library(mosaic)
+library(tidyverse)
+```
+
+Now we want to load in our sheet of Hayden Stork's rapsodo session stats.
+```{r}
+stork_stat <- read.csv('', skip = 1, header = TRUE)
+```

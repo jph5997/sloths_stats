@@ -151,4 +151,8 @@ After doing all of these calculations, we used the mutate function to add a colu
 ```{r}
 library(dplyr)
 ```
-This library is used because we are going to need it to combine all rows of the tables
+This library is used because we are going to need it to combine all rows of the tables.
+
+```{r}
+
+```
