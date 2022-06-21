@@ -16,5 +16,35 @@ library(tidyverse)
 
 Now we want to load in our sheet of Hayden Stork's rapsodo session stats.
 ```{r}
-stork_stat <- read.csv('', skip = 1, header = TRUE)
+stork_stat <- read.csv('stork_sheet.csv', header = TRUE)
 ```
+This gives us a table of all of Hayden Stork's registered stats for his session on June 14th, 2022. The three categories we have are:
+* Launch Angle (degrees)
+* Exit Velocity (mph)
+* Spin (rpm)
+* Spin Type
+* Distance (feet)
+
+Now we can throw all of this data into different types of graphs.
+
+## Spin
+
+The first thing we want to look at is spin on Stork's batted balls.
+```{r}
+stork_stat %>%
+  ggplot(aes(x = Spin.type , y = Spin)) + 
+  geom_boxplot() +
+  xlab("Spin Type") +
+  ylab("Spin Rate (rpm)")
+```
+
+After looking at this graph we see that there were three tpes of spin (topspin, backspin, sidespin). The high spin rates were usually back spin, which makes sense because flyballs use backspin to somewhat "defy" gravity. This then makes the ball carry further.
+
+To better understand spin, we want to look at the count of all the spins in the session.
+
+```{r}
+stork_stat %>%
+  group_by(Spin.type) %>%
+  count(Spin.type)
+```
+So we can see that while Stork registered 35 hits, most of which were back spin.
