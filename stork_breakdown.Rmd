@@ -47,4 +47,69 @@ stork_stat %>%
   group_by(Spin.type) %>%
   count(Spin.type)
 ```
-So we can see that while Stork registered 35 hits, most of which were back spin.
+So we can see that while Stork registered 35 hits, most of which were back spin. This would probably mean that there were a lot of fly balls.
+
+```{r}
+stork_stat %>%
+  ggplot(aes(x = Spin.type , y = Distance)) + 
+  geom_boxplot() +
+  xlab("Spin Type") +
+  ylab("Distance (ft)")
+```
+
+## Distance
+
+```{r}
+stork_stat %>%
+  ggplot(aes(x = Spin, y = Distance, color = Spin.type))+
+  geom_point()
+```
+
+The plot above shows spin and distance.
+
+## LA and EV
+
+We want to look at some plots comparing the two.
+
+```{r}
+stork_stat %>%
+  ggplot(aes(x = L..Angle, y = Exit.Velo.))+
+  geom_point() + 
+  stat_smooth(se = FALSE) +
+  xlab("Launch Angle (degrees)") +
+  ylab("Exit Velocity (mph)")
+```
+
+## Distance
+
+Now we want to bring it all together and form distance.
+```{r}
+stork_stat %>%
+  ggplot(aes(x = Distance, y = Spin))+
+  geom_point()
+```
+
+The next graph will show exit velo and distance
+```{r}
+stork_stat %>%
+  ggplot(aes(x = Distance, y = Exit.Velo.))+
+  geom_point() +
+  stat_smooth(se = FALSE) +
+  ylab("Exit Velocity (ft)")
+```
+
+The last graph we want to make shows distance vs launch angle
+```{r}
+stork_stat %>%
+  ggplot(aes(x = L..Angle, y = Distance))+
+  geom_point() +
+  xlab("Launch Angle")
+```
+
+Lastly, let's look at spin rate vs distance
+```{r}
+stork_stat %>%
+  ggplot(aes(x = Spin, y = Distance))+
+  geom_point() +
+  stat_smooth()
+```
