@@ -238,13 +238,63 @@ library(tidyverse)</code></pre>
 <p>Now that we have our setup done, we need to load in the files necessary which is as simple as pulling the files from GameChanger.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2xvdGhzX3N0YXQgPC0gcmVhZC5jc3YoJ3Nsb3RocyBDU1ZzL3Nsb3Roc183LTQuY3N2Jywgc2tpcCA9IDEsIGhlYWRlciA9IFRSVUUpXG5gYGAifQ== -->
-<pre class="r"><code>sloths_stat &lt;- read.csv(&#39;sloths CSVs/sloths_7-4.csv&#39;, skip = 1, header = TRUE)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2xvdGhzX3N0YXQgPC0gcmVhZC5jc3YoJ3Nsb3RocyBDU1ZzL3Nsb3Rocy03LTQuY3N2Jywgc2tpcCA9IDEsIGhlYWRlciA9IFRSVUUpXG5gYGAifQ== -->
+<pre class="r"><code>sloths_stat &lt;- read.csv(&#39;sloths CSVs/sloths-7-4.csv&#39;, skip = 1, header = TRUE)</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>This loaded in the sloths stats up until <strong>JULY 4th</strong> and now we have to make sure all of these stats end up being numbers. Since we loaded them straight from gamechanger, we have to convert all the characters to numeric, so we can actually use them.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGl0Y2hfc3RhdHMgPC1cbiAgc2xvdGhzX3N0YXQgJT4lXG4gIHNlbGVjdChcIk51bWJlclwiLFwiRmlyc3RcIixcIkxhc3RcIixcIkdQXCIsXCJJUFwiLFwiV1wiLFwiTFwiLFwiU1ZcIixcIkguMVwiLFwiUi4xXCIsXCJFUlwiLFwiQkIuMVwiLFwiU08uMVwiLFwiRVJBXCIsXCJXSElQXCIsXCJCRlwiLFwiUC5JUFwiLFwiUC5CRlwiLFwiRklQXCIsXCJTLlwiLFwiRlBTXCIsXCJGUFMuXCIsXCJGUFNPLlwiLFwiRlBTVy5cIixcIkZQU0guXCIpXG5cbnBpdGNoX3N0YXRzIDwtIHRyYW5zZm9ybShwaXRjaF9zdGF0cywgR1AgPSBhcy5udW1lcmljKEdQKSxcbiAgICAgICAgICAgICAgICAgICAgICAgSVAgPSBhcy5udW1lcmljKElQKSxcbiAgICAgICAgICAgICAgICAgICAgICAgVyA9IGFzLm51bWVyaWMoVyksXG4gICAgICAgICAgICAgICAgICAgICAgIEwgPSBhcy5udW1lcmljKEwpLFxuICAgICAgICAgICAgICAgICAgICAgICBILjEgPSBhcy5udW1lcmljKEguMSksXG4gICAgICAgICAgICAgICAgICAgICAgIFIuMSA9IGFzLm51bWVyaWMoUi4xKSxcbiAgICAgICAgICAgICAgICAgICAgICAgRVIgPSBhcy5udW1lcmljKEVSKSxcbiAgICAgICAgICAgICAgICAgICAgICAgQkIuMSA9IGFzLm51bWVyaWMoQkIuMSksXG4gICAgICAgICAgICAgICAgICAgICAgIFNPLjEgPSBhcy5udW1lcmljKFNPLjEpLFxuICAgICAgICAgICAgICAgICAgICAgICBFUkEgPSBhcy5udW1lcmljKEVSQSksXG4gICAgICAgICAgICAgICAgICAgICAgIFdISVAgPSBhcy5udW1lcmljKFdISVApLFxuICAgICAgICAgICAgICAgICAgICAgICBCRiA9IGFzLm51bWVyaWMoQkYpLFxuICAgICAgICAgICAgICAgICAgICAgICBQLklQID0gYXMubnVtZXJpYyhQLklQKSxcbiAgICAgICAgICAgICAgICAgICAgICAgUC5CRiA9IGFzLm51bWVyaWMoUC5CRiksXG4gICAgICAgICAgICAgICAgICAgICAgIEZJUCA9IGFzLm51bWVyaWMoRklQKSxcbiAgICAgICAgICAgICAgICAgICAgICAgUy4gPSBhcy5udW1lcmljKFMuKSxcbiAgICAgICAgICAgICAgICAgICAgICAgRlBTID0gYXMubnVtZXJpYyhGUFMpLFxuICAgICAgICAgICAgICAgICAgICAgICBGUFMuID0gYXMubnVtZXJpYyhGUFMuKSxcbiAgICAgICAgICAgICAgICAgICAgICAgRlBTTy4gPSBhcy5udW1lcmljKEZQU08uKSxcbiAgICAgICAgICAgICAgICAgICAgICAgRlBTVy4gPSBhcy5udW1lcmljKEZQU1cuKSxcbiAgICAgICAgICAgICAgICAgICAgICAgRlBTSC4gPSBhcy5udW1lcmljKEZQU0guKSlcbnBpdGNoX3N0YXRzIDwtIHBpdGNoX3N0YXRzWy1jKDI1LDI2LCAyNyksIF1cbmBgYCJ9 -->
+<pre class="r"><code>pitch_stats &lt;-
+  sloths_stat %&gt;%
+  select(&quot;Number&quot;,&quot;First&quot;,&quot;Last&quot;,&quot;GP&quot;,&quot;IP&quot;,&quot;W&quot;,&quot;L&quot;,&quot;SV&quot;,&quot;H.1&quot;,&quot;R.1&quot;,&quot;ER&quot;,&quot;BB.1&quot;,&quot;SO.1&quot;,&quot;ERA&quot;,&quot;WHIP&quot;,&quot;BF&quot;,&quot;P.IP&quot;,&quot;P.BF&quot;,&quot;FIP&quot;,&quot;S.&quot;,&quot;FPS&quot;,&quot;FPS.&quot;,&quot;FPSO.&quot;,&quot;FPSW.&quot;,&quot;FPSH.&quot;)
+
+pitch_stats &lt;- transform(pitch_stats, GP = as.numeric(GP),
+                       IP = as.numeric(IP),
+                       W = as.numeric(W),
+                       L = as.numeric(L),
+                       H.1 = as.numeric(H.1),
+                       R.1 = as.numeric(R.1),
+                       ER = as.numeric(ER),
+                       BB.1 = as.numeric(BB.1),
+                       SO.1 = as.numeric(SO.1),
+                       ERA = as.numeric(ERA),
+                       WHIP = as.numeric(WHIP),
+                       BF = as.numeric(BF),
+                       P.IP = as.numeric(P.IP),
+                       P.BF = as.numeric(P.BF),
+                       FIP = as.numeric(FIP),
+                       S. = as.numeric(S.),
+                       FPS = as.numeric(FPS),
+                       FPS. = as.numeric(FPS.),
+                       FPSO. = as.numeric(FPSO.),
+                       FPSW. = as.numeric(FPSW.),
+                       FPSH. = as.numeric(FPSH.))
+pitch_stats &lt;- pitch_stats[-c(25,26, 27), ]</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>So after this long process of changing the entire table to numeric. Now we can play around with certain stats and trends. However, first thing we have to do is remove any hitters from this list.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGl0Y2hfc3RhdHMgPC1cbiAgcGl0Y2hfc3RhdHMgJT4lXG4gIGZpbHRlcihJUCA+IDEuMCkgJT4lXG4gIGZpbHRlcihJUCA8IDEwMClcbmBgYCJ9 -->
+<pre class="r"><code>pitch_stats &lt;-
+  pitch_stats %&gt;%
+  filter(IP &gt; 1.0) %&gt;%
+  filter(IP &lt; 100)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Now our pitching stats are set and ready to go. Right now it is only the Ground Sloths, but we can add more after the games today.</p>
+<p>The first thing we are doing is just playing around with a graph.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
 <!-- rnb-chunk-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQphdXRob3I6ICJKYWNvYiBIYWxsb3dlbGwiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KIyBTZXR1cA0KYGBge3J9DQojIGNsZWFuIHVwIHdvcmtzcGFjZSBlbnZpcm9ubWVudA0Kcm0obGlzdCA9IGxzKCkpDQoNCiMgYWxsIHBhY2thZ2VzIHVzZWQgZm9yIHRoZSBhc3NpZ25tZW50DQpsaWJyYXJ5KG1vc2FpYykNCmxpYnJhcnkodGlkeXZlcnNlKQ0KYGBgDQoNCk5vdyB0aGF0IHdlIGhhdmUgb3VyIHNldHVwIGRvbmUsIHdlIG5lZWQgdG8gbG9hZCBpbiB0aGUgZmlsZXMgbmVjZXNzYXJ5IHdoaWNoIGlzIGFzIHNpbXBsZSBhcyBwdWxsaW5nIHRoZSBmaWxlcyBmcm9tIEdhbWVDaGFuZ2VyLg0KDQpgYGB7cn0NCnNsb3Roc19zdGF0IDwtIHJlYWQuY3N2KCdzbG90aHMgQ1NWcy9zbG90aHNfNy00LmNzdicsIHNraXAgPSAxLCBoZWFkZXIgPSBUUlVFKQ0KYGBg</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQphdXRob3I6ICJKYWNvYiBIYWxsb3dlbGwiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KIyBTZXR1cA0KYGBge3J9DQojIGNsZWFuIHVwIHdvcmtzcGFjZSBlbnZpcm9ubWVudA0Kcm0obGlzdCA9IGxzKCkpDQoNCiMgYWxsIHBhY2thZ2VzIHVzZWQgZm9yIHRoZSBhc3NpZ25tZW50DQpsaWJyYXJ5KG1vc2FpYykNCmxpYnJhcnkodGlkeXZlcnNlKQ0KYGBgDQoNCk5vdyB0aGF0IHdlIGhhdmUgb3VyIHNldHVwIGRvbmUsIHdlIG5lZWQgdG8gbG9hZCBpbiB0aGUgZmlsZXMgbmVjZXNzYXJ5IHdoaWNoIGlzIGFzIHNpbXBsZSBhcyBwdWxsaW5nIHRoZSBmaWxlcyBmcm9tIEdhbWVDaGFuZ2VyLg0KDQpgYGB7cn0NCnNsb3Roc19zdGF0IDwtIHJlYWQuY3N2KCdzbG90aHMgQ1NWcy9zbG90aHMtNy00LmNzdicsIHNraXAgPSAxLCBoZWFkZXIgPSBUUlVFKQ0KYGBgDQoNClRoaXMgbG9hZGVkIGluIHRoZSBzbG90aHMgc3RhdHMgdXAgdW50aWwgKipKVUxZIDR0aCoqIGFuZCBub3cgd2UgaGF2ZSB0byBtYWtlIHN1cmUgYWxsIG9mIHRoZXNlIHN0YXRzIGVuZCB1cCBiZWluZyBudW1iZXJzLiBTaW5jZSB3ZSBsb2FkZWQgdGhlbSBzdHJhaWdodCBmcm9tIGdhbWVjaGFuZ2VyLCB3ZSBoYXZlIHRvIGNvbnZlcnQgYWxsIHRoZSBjaGFyYWN0ZXJzIHRvIG51bWVyaWMsIHNvIHdlIGNhbiBhY3R1YWxseSB1c2UgdGhlbS4NCg0KYGBge3J9DQpwaXRjaF9zdGF0cyA8LQ0KICBzbG90aHNfc3RhdCAlPiUNCiAgc2VsZWN0KCJOdW1iZXIiLCJGaXJzdCIsIkxhc3QiLCJHUCIsIklQIiwiVyIsIkwiLCJTViIsIkguMSIsIlIuMSIsIkVSIiwiQkIuMSIsIlNPLjEiLCJFUkEiLCJXSElQIiwiQkYiLCJQLklQIiwiUC5CRiIsIkZJUCIsIlMuIiwiRlBTIiwiRlBTLiIsIkZQU08uIiwiRlBTVy4iLCJGUFNILiIpDQoNCnBpdGNoX3N0YXRzIDwtIHRyYW5zZm9ybShwaXRjaF9zdGF0cywgR1AgPSBhcy5udW1lcmljKEdQKSwNCiAgICAgICAgICAgICAgICAgICAgICAgSVAgPSBhcy5udW1lcmljKElQKSwNCiAgICAgICAgICAgICAgICAgICAgICAgVyA9IGFzLm51bWVyaWMoVyksDQogICAgICAgICAgICAgICAgICAgICAgIEwgPSBhcy5udW1lcmljKEwpLA0KICAgICAgICAgICAgICAgICAgICAgICBILjEgPSBhcy5udW1lcmljKEguMSksDQogICAgICAgICAgICAgICAgICAgICAgIFIuMSA9IGFzLm51bWVyaWMoUi4xKSwNCiAgICAgICAgICAgICAgICAgICAgICAgRVIgPSBhcy5udW1lcmljKEVSKSwNCiAgICAgICAgICAgICAgICAgICAgICAgQkIuMSA9IGFzLm51bWVyaWMoQkIuMSksDQogICAgICAgICAgICAgICAgICAgICAgIFNPLjEgPSBhcy5udW1lcmljKFNPLjEpLA0KICAgICAgICAgICAgICAgICAgICAgICBFUkEgPSBhcy5udW1lcmljKEVSQSksDQogICAgICAgICAgICAgICAgICAgICAgIFdISVAgPSBhcy5udW1lcmljKFdISVApLA0KICAgICAgICAgICAgICAgICAgICAgICBCRiA9IGFzLm51bWVyaWMoQkYpLA0KICAgICAgICAgICAgICAgICAgICAgICBQLklQID0gYXMubnVtZXJpYyhQLklQKSwNCiAgICAgICAgICAgICAgICAgICAgICAgUC5CRiA9IGFzLm51bWVyaWMoUC5CRiksDQogICAgICAgICAgICAgICAgICAgICAgIEZJUCA9IGFzLm51bWVyaWMoRklQKSwNCiAgICAgICAgICAgICAgICAgICAgICAgUy4gPSBhcy5udW1lcmljKFMuKSwNCiAgICAgICAgICAgICAgICAgICAgICAgRlBTID0gYXMubnVtZXJpYyhGUFMpLA0KICAgICAgICAgICAgICAgICAgICAgICBGUFMuID0gYXMubnVtZXJpYyhGUFMuKSwNCiAgICAgICAgICAgICAgICAgICAgICAgRlBTTy4gPSBhcy5udW1lcmljKEZQU08uKSwNCiAgICAgICAgICAgICAgICAgICAgICAgRlBTVy4gPSBhcy5udW1lcmljKEZQU1cuKSwNCiAgICAgICAgICAgICAgICAgICAgICAgRlBTSC4gPSBhcy5udW1lcmljKEZQU0guKSkNCnBpdGNoX3N0YXRzIDwtIHBpdGNoX3N0YXRzWy1jKDI1LDI2LCAyNyksIF0NCmBgYA0KDQpTbyBhZnRlciB0aGlzIGxvbmcgcHJvY2VzcyBvZiBjaGFuZ2luZyB0aGUgZW50aXJlIHRhYmxlIHRvIG51bWVyaWMuIE5vdyB3ZSBjYW4gcGxheSBhcm91bmQgd2l0aCBjZXJ0YWluIHN0YXRzIGFuZCB0cmVuZHMuIEhvd2V2ZXIsIGZpcnN0IHRoaW5nIHdlIGhhdmUgdG8gZG8gaXMgcmVtb3ZlIGFueSBoaXR0ZXJzIGZyb20gdGhpcyBsaXN0Lg0KDQpgYGB7cn0NCnBpdGNoX3N0YXRzIDwtDQogIHBpdGNoX3N0YXRzICU+JQ0KICBmaWx0ZXIoSVAgPiAxLjApICU+JQ0KICBmaWx0ZXIoSVAgPCAxMDApDQpgYGANCg0KTm93IG91ciBwaXRjaGluZyBzdGF0cyBhcmUgc2V0IGFuZCByZWFkeSB0byBnby4gUmlnaHQgbm93IGl0IGlzIG9ubHkgdGhlIEdyb3VuZCBTbG90aHMsIGJ1dCB3ZSBjYW4gYWRkIG1vcmUgYWZ0ZXIgdGhlIGdhbWVzIHRvZGF5Lg0KDQpUaGUgZmlyc3QgdGhpbmcgd2UgYXJlIGRvaW5nIGlzIGp1c3QgcGxheWluZyBhcm91bmQgd2l0aCBhIGdyYXBoLg0KYGBge3J9DQoNCmBgYA==</div>
 
 
 

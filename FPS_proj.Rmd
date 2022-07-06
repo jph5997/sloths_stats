@@ -12,3 +12,56 @@ rm(list = ls())
 library(mosaic)
 library(tidyverse)
 ```
+
+Now that we have our setup done, we need to load in the files necessary which is as simple as pulling the files from GameChanger.
+
+```{r}
+sloths_stat <- read.csv('sloths CSVs/sloths-7-4.csv', skip = 1, header = TRUE)
+```
+
+This loaded in the sloths stats up until **JULY 4th** and now we have to make sure all of these stats end up being numbers. Since we loaded them straight from gamechanger, we have to convert all the characters to numeric, so we can actually use them.
+
+```{r}
+pitch_stats <-
+  sloths_stat %>%
+  select("Number","First","Last","GP","IP","W","L","SV","H.1","R.1","ER","BB.1","SO.1","ERA","WHIP","BF","P.IP","P.BF","FIP","S.","FPS","FPS.","FPSO.","FPSW.","FPSH.")
+
+pitch_stats <- transform(pitch_stats, GP = as.numeric(GP),
+                       IP = as.numeric(IP),
+                       W = as.numeric(W),
+                       L = as.numeric(L),
+                       H.1 = as.numeric(H.1),
+                       R.1 = as.numeric(R.1),
+                       ER = as.numeric(ER),
+                       BB.1 = as.numeric(BB.1),
+                       SO.1 = as.numeric(SO.1),
+                       ERA = as.numeric(ERA),
+                       WHIP = as.numeric(WHIP),
+                       BF = as.numeric(BF),
+                       P.IP = as.numeric(P.IP),
+                       P.BF = as.numeric(P.BF),
+                       FIP = as.numeric(FIP),
+                       S. = as.numeric(S.),
+                       FPS = as.numeric(FPS),
+                       FPS. = as.numeric(FPS.),
+                       FPSO. = as.numeric(FPSO.),
+                       FPSW. = as.numeric(FPSW.),
+                       FPSH. = as.numeric(FPSH.))
+pitch_stats <- pitch_stats[-c(25,26, 27), ]
+```
+
+So after this long process of changing the entire table to numeric. Now we can play around with certain stats and trends. However, first thing we have to do is remove any hitters from this list.
+
+```{r}
+pitch_stats <-
+  pitch_stats %>%
+  filter(IP > 1.0) %>%
+  filter(IP < 100)
+```
+
+Now our pitching stats are set and ready to go. Right now it is only the Ground Sloths, but we can add more after the games today.
+
+The first thing we are doing is just playing around with a graph.
+```{r}
+
+```
