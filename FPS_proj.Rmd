@@ -1,0 +1,14 @@
+---
+title: "R Notebook"
+author: "Jacob Hallowell"
+output: html_notebook
+---
+# Setup
+```{r}
+# clean up workspace environment
+rm(list = ls())
+
+# all packages used for the assignment
+library(mosaic)
+library(tidyverse)
+```
