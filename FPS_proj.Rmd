@@ -17,13 +17,25 @@ Now that we have our setup done, we need to load in the files necessary which is
 
 ```{r}
 sloths_stat <- read.csv('sloths CSVs/sloths-7-4.csv', skip = 1, header = TRUE)
+
+merchants_stat <- read.csv('Merchants CSVs/merch-7-4.csv', skip = 1, header = TRUE)
+
+bobcats_stat <- read.csv('Bobcats CSVs/Cats-7-4.csv', skip = 1, header = TRUE)
+
+bluecaps_stat <- read.csv('Caps CSVs/Caps-7-4.csv', skip = 1, header = TRUE)
 ```
 
+It would make a lot more sense if we could have all of the tables together for this project. So the goal here is to use an rbind function to make it all together.
+
+```{r}
+pitch_stats <-
+  rbind(sloths_stat, merchants_stat, bobcats_stat, bluecaps_stat)
+```
 This loaded in the sloths stats up until **JULY 4th** and now we have to make sure all of these stats end up being numbers. Since we loaded them straight from gamechanger, we have to convert all the characters to numeric, so we can actually use them.
 
 ```{r}
 pitch_stats <-
-  sloths_stat %>%
+  pitch_stats %>%
   select("Number","First","Last","GP","IP","W","L","SV","H.1","R.1","ER","BB.1","SO.1","ERA","WHIP","BF","P.IP","P.BF","FIP","S.","FPS","FPS.","FPSO.","FPSW.","FPSH.")
 
 pitch_stats <- transform(pitch_stats, GP = as.numeric(GP),
