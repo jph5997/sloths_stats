@@ -95,7 +95,7 @@ stork_stat %>%
   ggplot(aes(x = Distance, y = Exit.Velo.))+
   geom_point() +
   stat_smooth(se = FALSE) +
-  ylab("Exit Velocity (ft)")
+  ylab("Exit Velocity (mph)")
 ```
 
 The last graph we want to make shows distance vs launch angle
