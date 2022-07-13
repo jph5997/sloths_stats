@@ -25,6 +25,24 @@ bobcats_stat <- read.csv('Bobcats CSVs/Cats-7-4.csv', skip = 1, header = TRUE)
 bluecaps_stat <- read.csv('Caps CSVs/Caps-7-4.csv', skip = 1, header = TRUE)
 ```
 
+Another thing I want to do before combining all of the players into one graph is add a team section to all of these teams so I can group by them later on.
+```{r}
+sloths_stat <-
+  sloths_stat %>%
+  mutate(Team = "Ground Sloths")
+
+merchants_stat <-
+  merchants_stat %>%
+  mutate(Team = "Merchants")
+
+bluecaps_stat <-
+  bluecaps_stat %>%
+  mutate(Team = "Bluecaps")
+
+bobcats_stat <-
+  bobcats_stat %>%
+  mutate(Team = "Bobcats")
+```
 It would make a lot more sense if we could have all of the tables together for this project. So the goal here is to use an rbind function to make it all together.
 
 ```{r}
@@ -36,7 +54,7 @@ This loaded in the sloths stats up until **JULY 4th** and now we have to make su
 ```{r}
 pitch_stats <-
   pitch_stats %>%
-  select("Number","First","Last","GP","IP","W","L","SV","H.1","R.1","ER","BB.1","SO.1","ERA","WHIP","BF","P.IP","P.BF","FIP","S.","FPS","FPS.","FPSO.","FPSW.","FPSH.")
+  select("Number","First","Last","GP","IP","W","L","SV","H.1","R.1","ER","BB.1","SO.1","ERA","WHIP","BF","P.IP","P.BF","FIP","S.","FPS","FPS.","FPSO.","FPSW.","FPSH.","BABIP.1","BAA","K.BB","Team")
 
 pitch_stats <- transform(pitch_stats, GP = as.numeric(GP),
                        IP = as.numeric(IP),
@@ -58,7 +76,10 @@ pitch_stats <- transform(pitch_stats, GP = as.numeric(GP),
                        FPS. = as.numeric(FPS.),
                        FPSO. = as.numeric(FPSO.),
                        FPSW. = as.numeric(FPSW.),
-                       FPSH. = as.numeric(FPSH.))
+                       FPSH. = as.numeric(FPSH.),
+                       BABIP.1 = as.numeric(BABIP.1),
+                       BAA = as.numeric(BAA),
+                       K.BB = as.numeric(K.BB))
 pitch_stats <- pitch_stats[-c(25,26, 27), ]
 ```
 
@@ -74,6 +95,77 @@ pitch_stats <-
 Now our pitching stats are set and ready to go. Right now it is only the Ground Sloths, but we can add more after the games today.
 
 The first thing we are doing is just playing around with a graph.
-```{r}
 
+# Graphs
+
+The first graph below shows the relationship between Strike Percentage and ERA for all pitchers in the KCL.
+```{r}
+pitch_stats %>%
+  ggplot(aes(x = S., y = ERA)) +
+  geom_point() +
+  stat_smooth(se = FALSE) +
+  xlab("Strike %") 
 ```
+As we can see, there is a correlation between these two. As the strike percentage of a pitcher goes up, the ERA of that said pitcher goes down. As a league this is the case, but not necessarily for everyone.
+
+```{r}
+pitch_stats %>%
+  ggplot(aes(x = FPS., y = ERA)) +
+  geom_point() +
+  xlab("First Pitch Strike %")
+```
+When we look at this graph there is no correlation between throwing first pitch strikes and having a good ERA. There is somewhat of a decline once you get to a 60% first pitch strike percent.
+
+```{r}
+pitch_stats %>%
+  ggplot(aes(x = FIP, y = ERA)) +
+  geom_point() +
+  stat_smooth(se = FALSE)
+```
+There is clearly a correlation between FIP and ERA. FIP is essentially a different version of FIP where it factors out fielding. This is like ERA, but just better tailored for the future. Oddly enough the graph looks like a square root function until around 3 FIP. After that it goes to a exponential increase.
+
+```{r}
+pitch_stats %>%
+  ggplot(aes(x = BABIP.1, y = ERA)) +
+  geom_point() +
+  stat_smooth(se = FALSE) +
+  xlab("BABIP")
+```
+The higher the BABIP is for the pitcher, or the batting average of ball in play against. This makes a lot of sense because the more times an opposing player gets a hit, the more runs the pitcher will give up. This then raises that pitcher's ERA.
+
+```{r}
+pitch_stats %>%
+  ggplot(aes(x = BAA, y = ERA)) +
+  geom_point() +
+  stat_smooth(se = FALSE) +
+  xlab("Batting Average Against")
+```
+This one is interesting because of how it takes a dip around the .200 BAA mark. Then it rises after, which makes perfect sense because of how the more hits are allowed, the more runs will score.
+
+```{r}
+pitch_stats %>%
+  ggplot(aes(x = BB.1, y = ERA)) +
+  geom_point() +
+  stat_smooth(se = FALSE) +
+  xlab("Walks")
+```
+Surprisingly there doesn't seem to be a huge correlation between walks allowed and runs given up. There are some things that do correlate though. The lower ERAs seemed to have 5-10 walks ironically.
+
+```{r}
+pitch_stats %>%
+  ggplot(aes(x = WHIP, y = ERA)) +
+  geom_point() +
+  stat_smooth(se = FALSE)
+```
+There don't seem to be any surprises here. A low WHIP means a low ERA and same thing with a high WHIP and a high ERA. It seems like a constant increase throughout, but there is more of a sample size with the lower end of WHIP.
+
+```{r}
+pitch_stats %>%
+  ggplot(aes(x = FPS., y = BB.1, color = IP)) +
+  geom_point() +
+  stat_smooth(se = FALSE) +
+  xlab("First Pitch Strike %") +
+  ylab("Walks")
+```
+It is tricky to find a correlation with these two variables. A lot of pitchers were in that 50-60% first pitch strike area, so that could explain the dip in that area. It was not as constant as one might think. It would make sense if a lower FPS%, such as 30% had a lot of walks to go with it. One thing to explain this could be innings pitched. When we switch the color to innings pitched, we find that a lot of pitchers in the low walks and low FPS% zone do not have more than 5-10 innings. Thus, that aforementioned dip is where a lot of pitchers with more than 10 innings reside. Another thing to notice is that the more innings a player has pitched, the more walks they will have. However, there is an exception with a player near 25 innings and only has 2 walks. That pitcher would be Nathan Garard.
+
