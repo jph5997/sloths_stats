@@ -283,7 +283,7 @@ bobcats_stat &lt;-
 <p>This loaded in the sloths stats up until <strong>JULY 4th</strong> and now we have to make sure all of these stats end up being numbers. Since we loaded them straight from gamechanger, we have to convert all the characters to numeric, so we can actually use them.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGl0Y2hfc3RhdHMgPC1cbiAgcGl0Y2hfc3RhdHMgJT4lXG4gIHNlbGVjdChcIk51bWJlclwiLFwiRmlyc3RcIixcIkxhc3RcIixcIkdQXCIsXCJJUFwiLFwiV1wiLFwiTFwiLFwiU1ZcIixcIkguMVwiLFwiUi4xXCIsXCJFUlwiLFwiQkIuMVwiLFwiU08uMVwiLFwiRVJBXCIsXCJXSElQXCIsXCJCRlwiLFwiUC5JUFwiLFwiUC5CRlwiLFwiRklQXCIsXCJTLlwiLFwiRlBTXCIsXCJGUFMuXCIsXCJGUFNPLlwiLFwiRlBTVy5cIixcIkZQU0guXCIsXCJCQUJJUC4xXCIsXCJCQUFcIixcIksuQkJcIixcIlRlYW1cIilcblxucGl0Y2hfc3RhdHMgPC0gdHJhbnNmb3JtKHBpdGNoX3N0YXRzLCBHUCA9IGFzLm51bWVyaWMoR1ApLFxuICAgICAgICAgICAgICAgICAgICAgICBJUCA9IGFzLm51bWVyaWMoSVApLFxuICAgICAgICAgICAgICAgICAgICAgICBXID0gYXMubnVtZXJpYyhXKSxcbiAgICAgICAgICAgICAgICAgICAgICAgTCA9IGFzLm51bWVyaWMoTCksXG4gICAgICAgICAgICAgICAgICAgICAgIEguMSA9IGFzLm51bWVyaWMoSC4xKSxcbiAgICAgICAgICAgICAgICAgICAgICAgUi4xID0gYXMubnVtZXJpYyhSLjEpLFxuICAgICAgICAgICAgICAgICAgICAgICBFUiA9IGFzLm51bWVyaWMoRVIpLFxuICAgICAgICAgICAgICAgICAgICAgICBCQi4xID0gYXMubnVtZXJpYyhCQi4xKSxcbiAgICAgICAgICAgICAgICAgICAgICAgU08uMSA9IGFzLm51bWVyaWMoU08uMSksXG4gICAgICAgICAgICAgICAgICAgICAgIEVSQSA9IGFzLm51bWVyaWMoRVJBKSxcbiAgICAgICAgICAgICAgICAgICAgICAgV0hJUCA9IGFzLm51bWVyaWMoV0hJUCksXG4gICAgICAgICAgICAgICAgICAgICAgIEJGID0gYXMubnVtZXJpYyhCRiksXG4gICAgICAgICAgICAgICAgICAgICAgIFAuSVAgPSBhcy5udW1lcmljKFAuSVApLFxuICAgICAgICAgICAgICAgICAgICAgICBQLkJGID0gYXMubnVtZXJpYyhQLkJGKSxcbiAgICAgICAgICAgICAgICAgICAgICAgRklQID0gYXMubnVtZXJpYyhGSVApLFxuICAgICAgICAgICAgICAgICAgICAgICBTLiA9IGFzLm51bWVyaWMoUy4pLFxuICAgICAgICAgICAgICAgICAgICAgICBGUFMgPSBhcy5udW1lcmljKEZQUyksXG4gICAgICAgICAgICAgICAgICAgICAgIEZQUy4gPSBhcy5udW1lcmljKEZQUy4pLFxuICAgICAgICAgICAgICAgICAgICAgICBGUFNPLiA9IGFzLm51bWVyaWMoRlBTTy4pLFxuICAgICAgICAgICAgICAgICAgICAgICBGUFNXLiA9IGFzLm51bWVyaWMoRlBTVy4pLFxuICAgICAgICAgICAgICAgICAgICAgICBGUFNILiA9IGFzLm51bWVyaWMoRlBTSC4pLFxuICAgICAgICAgICAgICAgICAgICAgICBCQUJJUC4xID0gYXMubnVtZXJpYyhCQUJJUC4xKSxcbiAgICAgICAgICAgICAgICAgICAgICAgQkFBID0gYXMubnVtZXJpYyhCQUEpLFxuICAgICAgICAgICAgICAgICAgICAgICBLLkJCID0gYXMubnVtZXJpYyhLLkJCKSlcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGl0Y2hfc3RhdHMgPC1cbiAgcGl0Y2hfc3RhdHMgJT4lXG4gIHNlbGVjdChcIk51bWJlclwiLFwiRmlyc3RcIixcIkxhc3RcIixcIkdQXCIsXCJJUFwiLFwiV1wiLFwiTFwiLFwiU1ZcIixcIkguMVwiLFwiUi4xXCIsXCJFUlwiLFwiQkIuMVwiLFwiU08uMVwiLFwiRVJBXCIsXCJXSElQXCIsXCJCRlwiLFwiUC5JUFwiLFwiUC5CRlwiLFwiRklQXCIsXCJTLlwiLFwiRlBTXCIsXCJGUFMuXCIsXCJGUFNPLlwiLFwiRlBTVy5cIixcIkZQU0guXCIsXCJCQUJJUC4xXCIsXCJCQUFcIixcIksuQkJcIixcIlRlYW1cIilcblxucGl0Y2hfc3RhdHMgPC0gdHJhbnNmb3JtKHBpdGNoX3N0YXRzLCBHUCA9IGFzLm51bWVyaWMoR1ApLFxuICAgICAgICAgICAgICAgICAgICAgICBJUCA9IGFzLm51bWVyaWMoSVApLFxuICAgICAgICAgICAgICAgICAgICAgICBXID0gYXMubnVtZXJpYyhXKSxcbiAgICAgICAgICAgICAgICAgICAgICAgTCA9IGFzLm51bWVyaWMoTCksXG4gICAgICAgICAgICAgICAgICAgICAgIEguMSA9IGFzLm51bWVyaWMoSC4xKSxcbiAgICAgICAgICAgICAgICAgICAgICAgUi4xID0gYXMubnVtZXJpYyhSLjEpLFxuICAgICAgICAgICAgICAgICAgICAgICBFUiA9IGFzLm51bWVyaWMoRVIpLFxuICAgICAgICAgICAgICAgICAgICAgICBCQi4xID0gYXMubnVtZXJpYyhCQi4xKSxcbiAgICAgICAgICAgICAgICAgICAgICAgU08uMSA9IGFzLm51bWVyaWMoU08uMSksXG4gICAgICAgICAgICAgICAgICAgICAgIEVSQSA9IGFzLm51bWVyaWMoRVJBKSxcbiAgICAgICAgICAgICAgICAgICAgICAgV0hJUCA9IGFzLm51bWVyaWMoV0hJUCksXG4gICAgICAgICAgICAgICAgICAgICAgIEJGID0gYXMubnVtZXJpYyhCRiksXG4gICAgICAgICAgICAgICAgICAgICAgIFAuSVAgPSBhcy5udW1lcmljKFAuSVApLFxuICAgICAgICAgICAgICAgICAgICAgICBQLkJGID0gYXMubnVtZXJpYyhQLkJGKSxcbiAgICAgICAgICAgICAgICAgICAgICAgRklQID0gYXMubnVtZXJpYyhGSVApLFxuICAgICAgICAgICAgICAgICAgICAgICBTLiA9IGFzLm51bWVyaWMoUy4pLFxuICAgICAgICAgICAgICAgICAgICAgICBGUFMgPSBhcy5udW1lcmljKEZQUyksXG4gICAgICAgICAgICAgICAgICAgICAgIEZQUy4gPSBhcy5udW1lcmljKEZQUy4pLFxuICAgICAgICAgICAgICAgICAgICAgICBGUFNPLiA9IGFzLm51bWVyaWMoRlBTTy4pLFxuICAgICAgICAgICAgICAgICAgICAgICBGUFNXLiA9IGFzLm51bWVyaWMoRlBTVy4pLFxuICAgICAgICAgICAgICAgICAgICAgICBGUFNILiA9IGFzLm51bWVyaWMoRlBTSC4pLFxuICAgICAgICAgICAgICAgICAgICAgICBCQUJJUC4xID0gYXMubnVtZXJpYyhCQUJJUC4xKSxcbiAgICAgICAgICAgICAgICAgICAgICAgQkFBID0gYXMubnVtZXJpYyhCQUEpLFxuICAgICAgICAgICAgICAgICAgICAgICBLLkJCID0gYXMubnVtZXJpYyhLLkJCKSlcbnBpdGNoX3N0YXRzIDwtIHBpdGNoX3N0YXRzWy1jKDI1LDI2LCAyNyksIF1cbmBgYCJ9 -->
 <pre class="r"><code>pitch_stats &lt;-
   pitch_stats %&gt;%
   select(&quot;Number&quot;,&quot;First&quot;,&quot;Last&quot;,&quot;GP&quot;,&quot;IP&quot;,&quot;W&quot;,&quot;L&quot;,&quot;SV&quot;,&quot;H.1&quot;,&quot;R.1&quot;,&quot;ER&quot;,&quot;BB.1&quot;,&quot;SO.1&quot;,&quot;ERA&quot;,&quot;WHIP&quot;,&quot;BF&quot;,&quot;P.IP&quot;,&quot;P.BF&quot;,&quot;FIP&quot;,&quot;S.&quot;,&quot;FPS&quot;,&quot;FPS.&quot;,&quot;FPSO.&quot;,&quot;FPSW.&quot;,&quot;FPSH.&quot;,&quot;BABIP.1&quot;,&quot;BAA&quot;,&quot;K.BB&quot;,&quot;Team&quot;)
@@ -311,60 +311,8 @@ pitch_stats &lt;- transform(pitch_stats, GP = as.numeric(GP),
                        FPSH. = as.numeric(FPSH.),
                        BABIP.1 = as.numeric(BABIP.1),
                        BAA = as.numeric(BAA),
-                       K.BB = as.numeric(K.BB))</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZyBpbiBldmFsKHN1YnN0aXR1dGUobGlzdCguLi4pKSwgYF9kYXRhYCwgcGFyZW50LmZyYW1lKCkpIDpcbiAgTkFzIGludHJvZHVjZWQgYnkgY29lcmNpb25cbldhcm5pbmcgaW4gZXZhbChzdWJzdGl0dXRlKGxpc3QoLi4uKSksIGBfZGF0YWAsIHBhcmVudC5mcmFtZSgpKSA6XG4gIE5BcyBpbnRyb2R1Y2VkIGJ5IGNvZXJjaW9uXG5XYXJuaW5nIGluIGV2YWwoc3Vic3RpdHV0ZShsaXN0KC4uLikpLCBgX2RhdGFgLCBwYXJlbnQuZnJhbWUoKSkgOlxuICBOQXMgaW50cm9kdWNlZCBieSBjb2VyY2lvblxuV2FybmluZyBpbiBldmFsKHN1YnN0aXR1dGUobGlzdCguLi4pKSwgYF9kYXRhYCwgcGFyZW50LmZyYW1lKCkpIDpcbiAgTkFzIGludHJvZHVjZWQgYnkgY29lcmNpb25cbldhcm5pbmcgaW4gZXZhbChzdWJzdGl0dXRlKGxpc3QoLi4uKSksIGBfZGF0YWAsIHBhcmVudC5mcmFtZSgpKSA6XG4gIE5BcyBpbnRyb2R1Y2VkIGJ5IGNvZXJjaW9uXG5XYXJuaW5nIGluIGV2YWwoc3Vic3RpdHV0ZShsaXN0KC4uLikpLCBgX2RhdGFgLCBwYXJlbnQuZnJhbWUoKSkgOlxuICBOQXMgaW50cm9kdWNlZCBieSBjb2VyY2lvblxuV2FybmluZyBpbiBldmFsKHN1YnN0aXR1dGUobGlzdCguLi4pKSwgYF9kYXRhYCwgcGFyZW50LmZyYW1lKCkpIDpcbiAgTkFzIGludHJvZHVjZWQgYnkgY29lcmNpb25cbldhcm5pbmcgaW4gZXZhbChzdWJzdGl0dXRlKGxpc3QoLi4uKSksIGBfZGF0YWAsIHBhcmVudC5mcmFtZSgpKSA6XG4gIE5BcyBpbnRyb2R1Y2VkIGJ5IGNvZXJjaW9uXG5XYXJuaW5nIGluIGV2YWwoc3Vic3RpdHV0ZShsaXN0KC4uLikpLCBgX2RhdGFgLCBwYXJlbnQuZnJhbWUoKSkgOlxuICBOQXMgaW50cm9kdWNlZCBieSBjb2VyY2lvblxuV2FybmluZyBpbiBldmFsKHN1YnN0aXR1dGUobGlzdCguLi4pKSwgYF9kYXRhYCwgcGFyZW50LmZyYW1lKCkpIDpcbiAgTkFzIGludHJvZHVjZWQgYnkgY29lcmNpb25cbldhcm5pbmcgaW4gZXZhbChzdWJzdGl0dXRlKGxpc3QoLi4uKSksIGBfZGF0YWAsIHBhcmVudC5mcmFtZSgpKSA6XG4gIE5BcyBpbnRyb2R1Y2VkIGJ5IGNvZXJjaW9uXG5XYXJuaW5nIGluIGV2YWwoc3Vic3RpdHV0ZShsaXN0KC4uLikpLCBgX2RhdGFgLCBwYXJlbnQuZnJhbWUoKSkgOlxuICBOQXMgaW50cm9kdWNlZCBieSBjb2VyY2lvblxuV2FybmluZyBpbiBldmFsKHN1YnN0aXR1dGUobGlzdCguLi4pKSwgYF9kYXRhYCwgcGFyZW50LmZyYW1lKCkpIDpcbiAgTkFzIGludHJvZHVjZWQgYnkgY29lcmNpb25cbldhcm5pbmcgaW4gZXZhbChzdWJzdGl0dXRlKGxpc3QoLi4uKSksIGBfZGF0YWAsIHBhcmVudC5mcmFtZSgpKSA6XG4gIE5BcyBpbnRyb2R1Y2VkIGJ5IGNvZXJjaW9uXG5XYXJuaW5nIGluIGV2YWwoc3Vic3RpdHV0ZShsaXN0KC4uLikpLCBgX2RhdGFgLCBwYXJlbnQuZnJhbWUoKSkgOlxuICBOQXMgaW50cm9kdWNlZCBieSBjb2VyY2lvblxuV2FybmluZyBpbiBldmFsKHN1YnN0aXR1dGUobGlzdCguLi4pKSwgYF9kYXRhYCwgcGFyZW50LmZyYW1lKCkpIDpcbiAgTkFzIGludHJvZHVjZWQgYnkgY29lcmNpb25cbldhcm5pbmcgaW4gZXZhbChzdWJzdGl0dXRlKGxpc3QoLi4uKSksIGBfZGF0YWAsIHBhcmVudC5mcmFtZSgpKSA6XG4gIE5BcyBpbnRyb2R1Y2VkIGJ5IGNvZXJjaW9uXG5XYXJuaW5nIGluIGV2YWwoc3Vic3RpdHV0ZShsaXN0KC4uLikpLCBgX2RhdGFgLCBwYXJlbnQuZnJhbWUoKSkgOlxuICBOQXMgaW50cm9kdWNlZCBieSBjb2VyY2lvblxuV2FybmluZyBpbiBldmFsKHN1YnN0aXR1dGUobGlzdCguLi4pKSwgYF9kYXRhYCwgcGFyZW50LmZyYW1lKCkpIDpcbiAgTkFzIGludHJvZHVjZWQgYnkgY29lcmNpb25cbldhcm5pbmcgaW4gZXZhbChzdWJzdGl0dXRlKGxpc3QoLi4uKSksIGBfZGF0YWAsIHBhcmVudC5mcmFtZSgpKSA6XG4gIE5BcyBpbnRyb2R1Y2VkIGJ5IGNvZXJjaW9uXG5XYXJuaW5nIGluIGV2YWwoc3Vic3RpdHV0ZShsaXN0KC4uLikpLCBgX2RhdGFgLCBwYXJlbnQuZnJhbWUoKSkgOlxuICBOQXMgaW50cm9kdWNlZCBieSBjb2VyY2lvblxuV2FybmluZyBpbiBldmFsKHN1YnN0aXR1dGUobGlzdCguLi4pKSwgYF9kYXRhYCwgcGFyZW50LmZyYW1lKCkpIDpcbiAgTkFzIGludHJvZHVjZWQgYnkgY29lcmNpb25cbldhcm5pbmcgaW4gZXZhbChzdWJzdGl0dXRlKGxpc3QoLi4uKSksIGBfZGF0YWAsIHBhcmVudC5mcmFtZSgpKSA6XG4gIE5BcyBpbnRyb2R1Y2VkIGJ5IGNvZXJjaW9uXG5XYXJuaW5nIGluIGV2YWwoc3Vic3RpdHV0ZShsaXN0KC4uLikpLCBgX2RhdGFgLCBwYXJlbnQuZnJhbWUoKSkgOlxuICBOQXMgaW50cm9kdWNlZCBieSBjb2VyY2lvblxuIn0= -->
-<pre><code>Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion
-Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion
-Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion
-Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion
-Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion
-Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion
-Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion
-Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion
-Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion
-Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion
-Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion
-Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion
-Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion
-Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion
-Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion
-Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion
-Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion
-Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion
-Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion
-Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion
-Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion
-Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion
-Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion
-Warning in eval(substitute(list(...)), `_data`, parent.frame()) :
-  NAs introduced by coercion</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGl0Y2hfc3RhdHMgPC0gcGl0Y2hfc3RhdHNbLWMoMjUsMjYsIDI3KSwgXVxuYGBgIn0= -->
-<pre class="r"><code>pitch_stats &lt;- pitch_stats[-c(25,26, 27), ]</code></pre>
+                       K.BB = as.numeric(K.BB))
+pitch_stats &lt;- pitch_stats[-c(25,26, 27), ]</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
